@@ -26,15 +26,17 @@ module.exports = {
     facebook: config.facebook,
   },
   /* Plugins */
-  {
-    resolve: 'gatsby-source-prismic',
-    options: {
-      repositoryName: 'marioproject',
-      accessToken: `${process.env.API_KEY}`,
-      // Get the correct URLs in blog posts
-      linkResolver: () => post => `/${post.uid}`,
-      // PrismJS highlighting for labels and slices
-      //htmlSerializer: () => prismicHtmlSerializer,
+  plugins: [
+    {
+      resolve: 'gatsby-source-prismic',
+      options: {
+        repositoryName: 'marioproject',
+        accessToken: `${process.env.API_KEY}`,
+        // Get the correct URLs in blog posts
+        linkResolver: () => post => `/${post.uid}`,
+        // PrismJS highlighting for labels and slices
+        //htmlSerializer: () => prismicHtmlSerializer,
+      }
     },
-  },
+  ],
 }
