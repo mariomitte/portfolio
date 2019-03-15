@@ -1,6 +1,9 @@
 import React from "react"
 import PropTypes from 'prop-types'
 import { graphql } from "gatsby"
+import { SEO } from '../components'
+
+import website from '../../config'
 
 const Post = ({ data: { prismicPost }, location }) => {
   const { data } = prismicPost
@@ -10,6 +13,13 @@ const Post = ({ data: { prismicPost }, location }) => {
   }
   return (
     <React.Fragment>
+      <SEO
+        title={`${data.title.text} | ${website.siteTitleAlt}`}
+        pathname={location.pathname}
+        desc={data.description}
+        node={prismicPost}
+        article
+      />
       <h1>{data.title.text}</h1>
       <span>{categories}</span>
       <div dangerouslySetInnerHTML={{ __html: data.content.html }} />
@@ -30,10 +40,14 @@ export const pageQuery = graphql`
   query PostBySlug($uid: String!) {
     prismicPost(uid: { eq: $uid }) {
       uid
+      first_publication_date
+      last_publication_date
       data {
         title {
           text
         }
+        description
+        date(formatString: "DD.MM.YYYY")
         categories {
           category {
             document {
