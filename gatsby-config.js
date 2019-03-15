@@ -34,7 +34,7 @@ module.exports = {
       // Get the correct URLs in blog posts
       linkResolver: () => post => `/${post.uid}`,
       // PrismJS highlighting for labels and slices
-      htmlSerializer: () => prismicHtmlSerializer,
+      //htmlSerializer: () => prismicHtmlSerializer,
     },
   },
 }
