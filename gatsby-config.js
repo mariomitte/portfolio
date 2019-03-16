@@ -27,6 +27,8 @@ module.exports = {
   },
   /* Plugins */
   plugins: [
+    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-styled-components',
     {
       resolve: 'gatsby-source-prismic',
       options: {
@@ -37,6 +39,13 @@ module.exports = {
         // PrismJS highlighting for labels and slices
         //htmlSerializer: () => prismicHtmlSerializer,
       }
+    },
+    {
+      resolve: 'gatsby-plugin-google-analytics',
+      options: {
+        trackingId: config.googleAnalyticsID,
+        anonymize: true,
+      },
     },
   ],
 }
