@@ -8,7 +8,7 @@ import FooterMenu from './FooterMenu'
 import FooterPage from './FooterPage'
 import ArrowItem from '../ArrowItem'
 
-const Overlay = ({ menu, onMenu, prevIndex, nextIndex }) => {
+const Overlay = ({ color, menu, onMenu, prevIndex, nextIndex }) => {
   return (
     <React.Fragment>
       <Vertical>
@@ -29,10 +29,10 @@ const Overlay = ({ menu, onMenu, prevIndex, nextIndex }) => {
           <FooterPage menu={menu}>
             <div style={{ height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
               <div>
-                <Button onClick={prevIndex}>
+                <Button color={color} onClick={prevIndex}>
                   <ArrowItem direction="left" />
                 </Button>
-                <Button onClick={nextIndex}>
+                <Button color={color} onClick={nextIndex}>
                   <ArrowItem direction="right" />
                 </Button>
               </div>
@@ -48,7 +48,7 @@ const Button = styled.button`
   height: 40px;
   margin-left: -10px;
   clip-path: polygon(30% 0%, 100% 0, 70% 100%, 0% 100%);
-  background-color: ${theme.colors.navigation};
+  background-color: ${props => props.color};
   border: 0;
   cursor: pointer;
 `
@@ -91,6 +91,7 @@ const Footer = styled.div`
 `
 
 Overlay.propTypes = {
+  color: PropTypes.string.isRequired,
   menu: PropTypes.bool.isRequired,
   prevIndex: PropTypes.func.isRequired,
   nextIndex: PropTypes.func.isRequired,

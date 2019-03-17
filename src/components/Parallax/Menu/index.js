@@ -4,6 +4,8 @@ import { Spring, Keyframes, animated, config } from "react-spring/renderprops";
 import delay from "delay";
 import styled from 'styled-components'
 
+import 'typeface-raleway'
+
 const fast = {
   ...config.stiff,
   restSpeedThreshold: 1,
@@ -123,6 +125,7 @@ class SpringMenu extends React.Component {
 }
 
 const StyledLink = styled(Link)`
+  font-family: 'Kanit', sans-serif;
   color: black;
   font-weight: bold;
   position: relative;

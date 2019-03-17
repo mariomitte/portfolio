@@ -50,7 +50,7 @@ class Index extends React.Component {
   render() {
     const { items, index, menu, modal } = this.state
     const {
-      data: { homepage, social, posts, projects },
+      data: { homepage },
     } = this.props
 
     let pageItem = homepage.data.page.map((page, i) => {
@@ -64,6 +64,8 @@ class Index extends React.Component {
           first={page.first.text}
           second={page.second.text}
           image={page.image.url}
+          color={gradients[index]}
+          index={index}
         />
       )
     })
@@ -73,7 +75,7 @@ class Index extends React.Component {
         <Parallax className="container" ref="parallax" pages={items} horizontal scrolling={false}>
           {pageItem}
         </Parallax>
-        <Overlay menu={menu} onMenu={this.menu} prevIndex={this.prevIndex} nextIndex={this.nextIndex} />
+        <Overlay menu={menu} onMenu={this.menu} prevIndex={this.prevIndex} nextIndex={this.nextIndex} color={gradients[index]} />
       </Wrapper>
     );
   }

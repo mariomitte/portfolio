@@ -5,10 +5,10 @@ import theme from '../../../config/theme'
 
 import Card from './Card'
 
-const ButtonAction = ({ children, arrow, onClick }) => {
+const ButtonAction = ({ color, children, arrow, onClick }) => {
   if (arrow !== null) {
     return (
-      <Wrapper onClick={onClick}>
+      <Wrapper color={color} onClick={onClick}>
         <Arrow>
           {arrow}
         </Arrow>
@@ -17,7 +17,7 @@ const ButtonAction = ({ children, arrow, onClick }) => {
     );
   } else {
     return (
-      <Wrapper onClick={onClick}>
+      <Wrapper color={color} onClick={onClick}>
         {children}
       </Wrapper>
     );
@@ -32,7 +32,7 @@ const Wrapper = styled.div`
   opacity: ${props => props.opacity};
   height: 40px;
   border-width: 0;
-  background: ${theme.colors.pageButton};
+  background: ${props => props.color};
   color: white;
   border-radius: 5px;
   white-space: nowrap;
@@ -62,6 +62,7 @@ const Wrapper = styled.div`
 `
 
 ButtonAction.propTypes = {
+  color: PropTypes.string.isRequired,
   children: PropTypes.object.isRequired,
   arrow: PropTypes.object,
   onClick: PropTypes.func,
