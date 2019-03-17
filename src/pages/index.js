@@ -5,12 +5,16 @@ import styled from 'styled-components'
 import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
 
 import Page from '../components/Page'
+import Overlay from '../components/Parallax/Overlay'
 
 import theme from '../../config/theme'
+import '../components/Parallax/style.css'
+
+const gradients = [ "pink", "teal", "blue", "orange" ]
 
 class Index extends React.Component {
   state = {
-    items: 3,       // size of parallax container
+    items: 4,       // size of parallax container
     index: 0,       // keep track of scroll index in parallax page
     menu: false,    // flag for open and close menu
     modal: false,   // flag for poping a modal dynamic with content
@@ -53,6 +57,9 @@ class Index extends React.Component {
       return (
         <Page
           key={i}
+          offset={i}
+          gradient={gradients[i]}
+          repeatColor={theme.colors.background}
           caption={page.caption}
           first={page.first.text}
           second={page.second.text}
@@ -63,7 +70,10 @@ class Index extends React.Component {
 
     return (
       <Wrapper>
-        {pageItem}
+        <Parallax className="container" ref="parallax" pages={items} horizontal scrolling={false}>
+          {pageItem}
+        </Parallax>
+        <Overlay menu={menu} onMenu={this.menu} prevIndex={this.prevIndex} nextIndex={this.nextIndex} />
       </Wrapper>
     );
   }
@@ -83,7 +93,7 @@ export default Index
 
 Index.propTypes = {
   data: PropTypes.shape({
-    posts: PropTypes.object.isRequired,
+    homepage: PropTypes.object.isRequired,
   }).isRequired,
 }
 
@@ -104,56 +114,6 @@ export const pageQuery = graphql`
           }
           image {
             url
-          }
-        }
-      }
-    }
-    social: allPrismicHeroLinks {
-      edges {
-        node {
-          data {
-            title {
-              text
-            }
-            link {
-              url
-            }
-          }
-        }
-      }
-    }
-    posts: allPrismicPost(sort: { fields: [data___date], order: DESC }) {
-      edges {
-        node {
-          uid
-          data {
-            title {
-              text
-            }
-            date(formatString: "DD.MM.YYYY")
-            categories {
-              category {
-                document {
-                  data {
-                    name
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    projects: allPrismicProjects {
-      edges {
-        node {
-          data {
-            title {
-              text
-            }
-            link {
-              url
-            }
           }
         }
       }

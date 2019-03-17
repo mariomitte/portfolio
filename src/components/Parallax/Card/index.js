@@ -45,7 +45,6 @@ const link = ["/", "/blog", "/about-me", "/contact"]
 const Items = ({ toggle, onClick, uid, title, date }) => {
   const state = toggle ? "open" : "close";
   const items = title
-  console.log(items)
 
   return (
     <Sidebar native state={state}>{
@@ -72,7 +71,7 @@ const Items = ({ toggle, onClick, uid, title, date }) => {
                     ...props
                   }}
                 >
-                  <StyledLink to={`/blog/${uid[i]}`}>{title[i]} <span>{date[i]}</span></StyledLink>
+                  <StyledLink to={`/${uid[i]}`}>{title[i]} <span>{date[i]}</span></StyledLink>
                 </animated.div>
               )}
             </KeyFramed>

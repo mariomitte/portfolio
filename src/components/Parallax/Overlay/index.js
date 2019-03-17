@@ -26,10 +26,8 @@ const Overlay = ({ menu, onMenu, prevIndex, nextIndex }) => {
           </Column>
         </Vertical>
         <Footer>
-          <Line />
           <FooterPage menu={menu}>
-            <div style={{ height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <p style={{ padding: 0, margin: 0 }}>Some Text</p>
+            <div style={{ height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
               <div>
                 <Button onClick={prevIndex}>
                   <ArrowItem direction="left" />
@@ -89,17 +87,6 @@ const Footer = styled.div`
   width: 40%;
   height: 50px;
   z-index: 20;
-  display: flex;
-`
-
-const Line = styled.div`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.3;
-  border-top: 1px solid whitesmoke
   display: flex;
 `
 

@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from 'prop-types'
-import { graphql } from "gatsby"
+import { Link, graphql } from "gatsby"
 import { SEO } from '../components'
 
 import website from '../../config'
@@ -20,6 +20,7 @@ const Post = ({ data: { prismicPost }, location }) => {
         node={prismicPost}
         article
       />
+      <span>Back to: <Link to={'/'}>@Mario</Link></span>
       <h1>{data.title.text}</h1>
       <span>{categories}</span>
       <div dangerouslySetInnerHTML={{ __html: data.content.html }} />

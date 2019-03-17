@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+sitemap: https://withmario.netlify.com/sitemap.xml

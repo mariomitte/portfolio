@@ -60,8 +60,8 @@ class FooterMenu extends React.Component {
 const Wrapper = styled.div`
   position: absolute;
   bottom: 0;
-  left: 155px;
-  width: 40%;
+  left: 140px;
+  width: 30%;
   color: white;
 `
 
