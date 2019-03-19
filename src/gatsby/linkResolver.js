@@ -1,6 +1,11 @@
-const linkResolver = doc => {
+const linkResolver = ({ node, key, value }) => doc => {
   console.log(doc)
-  if (doc.slug === 'post') return `/blog/${doc.uid}`
+
+  const prefix = `${doc.uid}`
+
+  if (doc.type === 'post') return `/blog/${doc.uid}`
+
+  return `${prefix}`
 }
 
 module.exports = linkResolver

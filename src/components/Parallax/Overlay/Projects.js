@@ -33,6 +33,7 @@ const Projects = ({ pop, toggle, onPop, onToggle }) => {
             onPop={onPop}
             onToggle={onToggle}
             data={data.allPrismicProjects.edges}
+            at="/projects/"
           />
         );
       }}

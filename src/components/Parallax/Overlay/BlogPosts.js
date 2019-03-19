@@ -33,6 +33,7 @@ const BlogPosts = ({ pop, toggle, onPop, onToggle }) => {
             onPop={onPop}
             onToggle={onToggle}
             data={data.allPrismicPost.edges}
+            at="/blog/"
           />
         );
       }}

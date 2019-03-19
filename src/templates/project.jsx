@@ -5,25 +5,21 @@ import { SEO } from '../components'
 
 import website from '../../config'
 
-const Post = ({ data: { prismicPost }, location }) => {
-  const { data } = prismicPost
-  let categories = false
-  if (data.categories[0].category) {
-    categories = data.categories.map(c => c.category.document[0].data.name)
-  }
+const Post = ({ data: { prismicProjects }, location }) => {
+  const { data } = prismicProjects
+
   return (
     <React.Fragment>
       <SEO
         title={`${data.title.text} | ${website.siteTitleAlt}`}
         pathname={location.pathname}
         desc={data.description}
-        node={prismicPost}
+        node={prismicProjects}
         article
       />
       <span>Back to: <Link to={'/'}>@Mario</Link></span>
       <h1>{data.title.text}</h1>
-      <span>{categories}</span>
-      <div dangerouslySetInnerHTML={{ __html: data.content.html }} />
+      <p>{data.text.text}</p>
     </React.Fragment>
   )
 }
@@ -38,8 +34,8 @@ Post.propTypes = {
 }
 
 export const pageQuery = graphql`
-  query BlogPost($uid: String!) {
-    prismicPost(uid: { eq: $uid }) {
+  query ProjectPost($uid: String!) {
+    prismicProjects(uid: { eq: $uid }) {
       uid
       first_publication_date
       last_publication_date
@@ -49,17 +45,8 @@ export const pageQuery = graphql`
         }
         description
         date(formatString: "DD.MM.YYYY")
-        categories {
-          category {
-            document {
-              data {
-                name
-              }
-            }
-          }
-        }
-        content {
-          html
+        text {
+          text
         }
       }
     }

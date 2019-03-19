@@ -2,6 +2,8 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
+// const prismicLinkResolver = require('./src/gatsby/linkResolver')
+
 // const prismicHtmlSerializer = require('./src/gatsby/htmlSerializer')
 
 const config = require('./config')
@@ -35,9 +37,14 @@ module.exports = {
         repositoryName: 'marioproject',
         accessToken: `${process.env.API_KEY}`,
         // Get the correct URLs in blog posts
-        linkResolver: () => post => {
-          console.log(post)
-          return `/${post.uid}`
+        linkResolver: ({ node, key, value }) => doc => {
+          console.log(doc)
+
+          const prefix = `${doc.uid}`
+
+          if (doc.type === 'post') return `/blog/${doc.uid}`
+
+          return `${prefix}`
         },
         // PrismJS highlighting for labels and slices
         //htmlSerializer: () => prismicHtmlSerializer,

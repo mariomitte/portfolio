@@ -1,4 +1,14 @@
 const path = require("path")
+const gatsbyNodeGraphQL = require('./src/gatsby/gatsbyNodeGraphQL')
+
+// graphql function doesn't throw an error so we have to check to check for the result.errors to throw manually
+const wrapper = promise =>
+  promise.then(result => {
+    if (result.errors) {
+      throw result.errors
+    }
+    return result
+  })
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
@@ -16,14 +26,34 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  const template = path.resolve("src/templates/post.jsx")
+  // Path to templates
+  const postTemplate = require.resolve('./src/templates/post.jsx')
+  const projectTemplate = require.resolve('./src/templates/project.jsx')
 
-  pages.data.allPrismicPost.edges.forEach(edge => {
+  const result = await wrapper(
+    graphql(`
+      {
+        ${gatsbyNodeGraphQL}
+      }
+    `)
+  )
+
+  result.data.posts.edges.forEach(post => {
     createPage({
-      path: `/${edge.node.uid}`,
-      component: template,
+      path: `/blog/${post.node.uid}`,
+      component: postTemplate,
       context: {
-        uid: edge.node.uid,
+        uid: post.node.uid,
+      },
+    })
+  })
+
+  result.data.projects.edges.forEach(project => {
+    createPage({
+      path: `/projects/${project.node.uid}`,
+      component: projectTemplate,
+      context: {
+        uid: project.node.uid,
       },
     })
   })

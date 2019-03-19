@@ -42,7 +42,7 @@ const KeyFramed = Keyframes.Trail({
 
 const link = ["/", "/blog", "/about-me", "/contact"]
 
-const Items = ({ toggle, onClick, uid, title, date }) => {
+const Items = ({ toggle, onClick, uid, title, date, at }) => {
   const state = toggle ? "open" : "close";
   const items = title
 
@@ -71,7 +71,7 @@ const Items = ({ toggle, onClick, uid, title, date }) => {
                     ...props
                   }}
                 >
-                  <StyledLink to={`/${uid[i]}`}>{title[i]} <span>{date[i]}</span><Line /></StyledLink>
+                  <StyledLink to={`${at}${uid[i]}`}>{title[i]} <span>{date[i]}</span><Line /></StyledLink>
                   <Line />
                 </animated.div>
               )}
@@ -83,7 +83,7 @@ const Items = ({ toggle, onClick, uid, title, date }) => {
   );
 }
 
-const Card = ({ pop, toggle, onPop, onToggle, data }) => {
+const Card = ({ pop, toggle, onPop, onToggle, data, at }) => {
   const title = data.map(item => item.node.data.title.text)
   const date = data.map(item => item.node.data.date)
   const uid = data.map(item => item.node.uid)
@@ -96,7 +96,7 @@ const Card = ({ pop, toggle, onPop, onToggle, data }) => {
             height: height,
           }}
         >
-          <Items toggle={pop} onClick={onPop} uid={uid} title={title} date={date} />
+          <Items toggle={pop} onClick={onPop} uid={uid} title={title} date={date} at={at} />
         </Wrapper>
       )
     }</Pop>
@@ -165,6 +165,7 @@ Card.propTypes = {
   onPop: PropTypes.func,
   onToggle: PropTypes.func,
   data: PropTypes.array,
+  at: PropTypes.array.isRequired,
 }
 
 export default Card;
