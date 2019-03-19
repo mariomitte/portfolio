@@ -85,7 +85,6 @@ const Line = styled.div`
   opacity: 0.3;
   border-top: 1px solid whitesmoke;
   display: flex;
-
 `
 
 const Stripe = styled.div`

@@ -6,26 +6,11 @@ import Card from '../Card'
 import Button from '../ButtonAction'
 import ArrowItem from '../ArrowItem'
 
+import BlogPosts from './BlogPosts'
+import Projects from './Projects'
+
 import 'typeface-raleway'
 const items = ["home page", "blog", "about me", "contact"];
-
-// query={graphql`
-//   query FooterMenuQuery {
-//     allPrismicPost {
-//       edges {
-//         node {
-//           uid
-//           data {
-//             title {
-//               text
-//             }
-//             date(formatString: "DD.MM.YYYY")
-//           }
-//         }
-//       }
-//     }
-//   }
-// `}
 
 class FooterMenu extends React.Component {
   state = {
@@ -41,55 +26,58 @@ class FooterMenu extends React.Component {
     const { toggle, pop } = this.state
     const { index, color } = this.props
 
-    return (
-      <StaticQuery
-        query={graphql`
-          query FooterMenuQuery {
-            allPrismicPost {
-              edges {
-                node {
-                  uid
-                  data {
-                    title {
-                      text
-                    }
-                    date(formatString: "DD.MM.YYYY")
-                  }
-                }
-              }
-            }
-          }
-        `}
-        render={data => {
-          if(index === 0) {
-            return (
-              <Wrapper />
-            )
-          }
-          if(index === 1) {
-            return (
-              <Wrapper>
-                <Card pop={pop} toggle={toggle} onPop={this.pop} onToggle={this.toggle} data={data.allPrismicPost.edges} />
-                <div style={{ height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <p style={{ padding: 0, margin: 0 }}>#mario</p>
-                  <Button
-                    color={color}
-                    children={<span>Posts</span>}
-                    arrow={<ArrowItem color="true" direction={pop ? "down" : "up"} />}
-                    onClick={this.pop}
-                  />
-                </div>
-              </Wrapper>
-            )
-          }
-          if(index === 2 && index === 3) {
-            return (
-              <Wrapper />
-            )
-          }
-        }}
-      />
-    );
+    if(index === 0) {
+      return (
+        <Wrapper />
+      )
+    }
+    if(index === 1) {
+      return (
+        <Wrapper>
+          <BlogPosts
+            pop={pop}
+            toggle={toggle}
+            onPop={this.pop}
+            onToggle={this.toggle}
+          />
+          <div style={{ height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <p style={{ padding: 0, margin: 0 }}>#mario</p>
+            <Button
+              color={color}
+              children={<span>Posts</span>}
+              arrow={<ArrowItem color="true" direction={pop ? "down" : "up"} />}
+              onClick={this.pop}
+            />
+          </div>
+        </Wrapper>
+      )
+    }
+    if(index === 2) {
+      return (
+        <Wrapper>
+          <Projects
+            pop={pop}
+            toggle={toggle}
+            onPop={this.pop}
+            onToggle={this.toggle}
+          />
+          <div style={{ height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <p style={{ padding: 0, margin: 0 }}></p>
+            <Button
+              color={color}
+              children={<span>Projects</span>}
+              arrow={<ArrowItem color="true" direction={pop ? "down" : "up"} />}
+              onClick={this.pop}
+            />
+          </div>
+        </Wrapper>
+      )
+    }
+    if(index === 3) {
+      return (
+        <Wrapper />
+      )
+    }
   }
 }
 

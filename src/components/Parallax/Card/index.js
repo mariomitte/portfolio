@@ -71,7 +71,8 @@ const Items = ({ toggle, onClick, uid, title, date }) => {
                     ...props
                   }}
                 >
-                  <StyledLink to={`/${uid[i]}`}>{title[i]} <span>{date[i]}</span></StyledLink>
+                  <StyledLink to={`/${uid[i]}`}>{title[i]} <span>{date[i]}</span><Line /></StyledLink>
+                  <Line />
                 </animated.div>
               )}
             </KeyFramed>
@@ -101,6 +102,12 @@ const Card = ({ pop, toggle, onPop, onToggle, data }) => {
     }</Pop>
   );
 }
+
+const Line = styled.div`
+  width: 100%;
+  opacity: 0.3;
+  border-bottom: 1px solid whitesmoke;
+`
 
 const StyledLink = styled(Link)`
   color: white;

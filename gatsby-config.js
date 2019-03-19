@@ -35,7 +35,10 @@ module.exports = {
         repositoryName: 'marioproject',
         accessToken: `${process.env.API_KEY}`,
         // Get the correct URLs in blog posts
-        linkResolver: () => post => `/${post.uid}`,
+        linkResolver: () => post => {
+          console.log(post)
+          return `/${post.uid}`
+        },
         // PrismJS highlighting for labels and slices
         //htmlSerializer: () => prismicHtmlSerializer,
       }
