@@ -93,6 +93,7 @@ const Footer = styled.div`
 Overlay.propTypes = {
   color: PropTypes.string.isRequired,
   menu: PropTypes.bool.isRequired,
+  onMenu: PropTypes.func.isRequired,
   prevIndex: PropTypes.func.isRequired,
   nextIndex: PropTypes.func.isRequired,
 }

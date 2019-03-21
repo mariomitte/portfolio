@@ -1,4 +1,4 @@
 import SEO from './SEO'
-// import Layout from './Layout'
+import TemplateLayout from './TemplateLayout'
 
-export { SEO }
+export { SEO, TemplateLayout }

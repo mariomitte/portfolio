@@ -38,11 +38,11 @@ module.exports = {
         accessToken: `${process.env.API_KEY}`,
         // Get the correct URLs in blog posts
         linkResolver: ({ node, key, value }) => doc => {
-          console.log(doc)
 
           const prefix = `${doc.uid}`
 
           if (doc.type === 'post') return `/blog/${doc.uid}`
+          if (doc.type === 'projects') return `/projects/${doc.uid}`
 
           return `${prefix}`
         },

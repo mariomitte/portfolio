@@ -1,7 +1,8 @@
 import React from "react"
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import { Link, graphql } from "gatsby"
-import { SEO } from '../components'
+import { SEO, TemplateLayout } from '../components'
 
 import website from '../../config'
 
@@ -12,7 +13,7 @@ const Post = ({ data: { prismicPost }, location }) => {
     categories = data.categories.map(c => c.category.document[0].data.name)
   }
   return (
-    <React.Fragment>
+    <TemplateLayout type="Blog Posts">
       <SEO
         title={`${data.title.text} | ${website.siteTitleAlt}`}
         pathname={location.pathname}
@@ -20,13 +21,20 @@ const Post = ({ data: { prismicPost }, location }) => {
         node={prismicPost}
         article
       />
-      <span>Back to: <Link to={'/'}>@Mario</Link></span>
-      <h1>{data.title.text}</h1>
-      <span>{categories}</span>
-      <div dangerouslySetInnerHTML={{ __html: data.content.html }} />
-    </React.Fragment>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', height: '50px', padding: '0 1rem' }}>
+        <span>Back to: <Link to={'/blog/'}>Blog Posts</Link></span>
+      </div>
+      <Wrapper dangerouslySetInnerHTML={{ __html: data.content.html }} />
+    </TemplateLayout>
   )
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 2rem;
+`
 
 export default Post
 

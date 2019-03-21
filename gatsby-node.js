@@ -13,19 +13,6 @@ const wrapper = promise =>
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
-  const pages = await graphql(`
-    {
-      allPrismicPost {
-        edges {
-          node {
-            id
-            uid
-          }
-        }
-      }
-    }
-  `)
-
   // Path to templates
   const postTemplate = require.resolve('./src/templates/post.jsx')
   const projectTemplate = require.resolve('./src/templates/project.jsx')
