@@ -4,20 +4,20 @@ import styled from 'styled-components'
 import { Link, graphql } from "gatsby"
 
 import TemplateLayout from '../components/TemplateLayout'
-import Header from '../components/header';
+import Header from '../components/Header';
 
 const Blog = ({ data }) => {
   console.log("-- Blog --", data)
 
-  let blogItem = data.allPrismicPost.edges.map((post, i) => {
+  let blogItem = data.allPrismicPost.edges.map((item, i) => {
     let at = "/blog/"
     return (
-      <StyledLink to={`${at}${post.node.uid}`} key={i}>
+      <StyledLink to={`${at}${item.node.uid}`} key={i}>
         <PostList>
           <Wrapper>
             <Header
-              title={post.node.data.title.text}
-              span={post.node.data.date}
+              title={item.node.data.title.text}
+              span={item.node.data.date}
             />
           </Wrapper>
         </PostList>
@@ -27,9 +27,6 @@ const Blog = ({ data }) => {
 
   return (
     <TemplateLayout type="Blog Posts">
-      <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', height: '50px', padding: '0 1rem' }}>
-        <span>Back to: <Link to={'/'}>@Mario</Link></span>
-      </div>
       {blogItem}
     </TemplateLayout>
   );
@@ -43,13 +40,14 @@ const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 `;
 
 const PostList = styled.div`
   width: 100%;
   height: 200px;
-  border-bottom: 1px solid  gainsboro;
   margin: .5rem 0;
 `;
 

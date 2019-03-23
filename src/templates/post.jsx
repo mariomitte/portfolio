@@ -13,27 +13,39 @@ const Post = ({ data: { prismicPost }, location }) => {
     categories = data.categories.map(c => c.category.document[0].data.name)
   }
   return (
-    <TemplateLayout type="Blog Posts">
+    <TemplateLayout type={data.title.text}>
       <SEO
         title={`${data.title.text} | ${website.siteTitleAlt}`}
         pathname={location.pathname}
         desc={data.description}
         node={prismicPost}
-        article
       />
-      <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', height: '50px', padding: '0 1rem' }}>
-        <span>Back to: <Link to={'/blog/'}>Blog Posts</Link></span>
-      </div>
-      <Wrapper dangerouslySetInnerHTML={{ __html: data.content.html }} />
+      <Wrapper>
+        <Container>
+          <PostList dangerouslySetInnerHTML={{ __html: data.content.html }} />
+        </Container>
+      </Wrapper>
     </TemplateLayout>
   )
 }
+
+const Container = styled.div`
+  padding: 0 2rem;
+`;
+
+const PostList = styled.div`
+  width: 100%;
+  margin: .5rem 0;
+  min-height: 200px;
+`;
 
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 `
 
 export default Post

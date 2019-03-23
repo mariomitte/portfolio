@@ -19,10 +19,17 @@ const ImageItem = ({ url, type }) => {
   };
 
   return <ImageContainer style={styles}>
-    <SlopeEndGradient />
-    <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
-      <p style={{ fontSize: '70px', color: 'white', marginRight: '2rem' }}>{type}</p>
-    </div>
+    <SlopeEndGradient>
+      <p style={{
+          fontSize: '40px',
+          color: 'white',
+          flexWrap: 'wrap',
+          width: '30%',
+        }}
+      >
+        {type}
+      </p>
+    </SlopeEndGradient>
   </ImageContainer>;
 };
 
@@ -45,17 +52,19 @@ const Navbar = ({ menu, onMenu, type }) => (
 const SlopeContainer = styled.div`
   position: absolute;
   z-index: -1;
-  width: 140%;
+  width: 100%;
   height: 400px;
 `
 
 const SlopeEnd = styled(SlopeContainer)`
-  clip-path: polygon(70% 0, 100% 0, calc(100% - 20vw) 100%, calc(70% - 20vw) 100%);
-  opacity: 0.8;
+  clip-path: polygon(70% 0, 100% 0, 100% 100%, calc(70% - 20vw) 100%);
 `
 
 const SlopeEndGradient = styled(SlopeEnd)`
   background: green;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 `
 
 const ImageContainer = styled.div`
@@ -63,9 +72,7 @@ const ImageContainer = styled.div`
   width: 100%;
   right: 0;
   top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
 `
 
 const Wrapper = styled.div`

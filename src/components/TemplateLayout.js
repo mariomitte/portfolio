@@ -49,8 +49,7 @@ const Limits = styled.div`
   position: absolute;
   top: 300px;
   background-color: white;
-  border: 1px solid  gainsboro;
-  border-radius: 1em;
+  border-radius: 2px;
 `;
 
 const GlobalStyles = createGlobalStyle`

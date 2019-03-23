@@ -35,8 +35,8 @@ const KeyFramed = Keyframes.Trail({
   close: { to: { x: -100, opacity: 0 } }
 });
 
-const items = ["home", "blog", "projects", "about me"];
-const link = ["/", "/blog", "/projects", "/about-me"]
+const items = ["home", "blog", "projects", "places", "about me"];
+const link = ["/", "/blog", "/projects", "/places", "/about-me"]
 
 const Navigation = ({ toggle }) => {
   const state = toggle ? "open" : "close";
