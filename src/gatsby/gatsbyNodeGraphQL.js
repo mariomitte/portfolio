@@ -7,6 +7,15 @@ const gatsbyNodeGraphQL = `
           title {
             text
           }
+          image {
+            localFile {
+              childImageSharp {
+                resize(width: 600) {
+                  src
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -18,6 +27,15 @@ const gatsbyNodeGraphQL = `
         data {
           title {
             text
+          }
+          image {
+            localFile {
+              childImageSharp {
+                resize(width: 600) {
+                  src
+                }
+              }
+            }
           }
         }
       }

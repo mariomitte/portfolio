@@ -50,6 +50,8 @@ module.exports = {
         //htmlSerializer: () => prismicHtmlSerializer,
       }
     },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     {
       resolve: 'gatsby-plugin-google-analytics',
       options: {

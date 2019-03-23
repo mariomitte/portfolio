@@ -7,7 +7,6 @@ import TemplateLayout from '../components/TemplateLayout'
 import Header from '../components/Header';
 
 const Blog = ({ data }) => {
-  console.log("-- Blog --", data)
 
   let blogItem = data.allPrismicPost.edges.map((item, i) => {
     let at = "/blog/"

@@ -16,12 +16,12 @@ class TemplateLayout extends React.Component {
 
   render() {
     const { menu } = this.state
-    const { children, type } = this.props
+    const { children, type, back, image } = this.props
 
     return (
       <Page>
         <GlobalStyles />
-        <Navbar menu={menu} onMenu={this.menu} type={type} />
+        <Navbar menu={menu} onMenu={this.menu} type={type}  back={back} image={image} />
         <Main>
           <Limits>
             {children}
@@ -47,6 +47,7 @@ const Limits = styled.div`
   max-width: 970px;
   width: 100%;
   position: absolute;
+  z-index: 10;
   top: 300px;
   background-color: white;
   border-radius: 2px;

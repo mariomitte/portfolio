@@ -8,9 +8,10 @@ import website from '../../config'
 
 const Post = ({ data: { prismicProjects }, location }) => {
   const { data } = prismicProjects
+  const image = data.image.localFile.childImageSharp
 
   return (
-    <TemplateLayout type={data.title.text}>
+    <TemplateLayout type={data.title.text} back="/projects/" image={image}>
       <SEO
         title={`${data.title.text} | ${website.siteTitleAlt}`}
         pathname={location.pathname}
@@ -71,6 +72,20 @@ export const pageQuery = graphql`
         date(formatString: "DD.MM.YYYY")
         text {
           text
+        }
+        image {
+          localFile {
+            childImageSharp {
+              fluid(maxWidth: 1080, quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+              resize(width: 1920, quality: 90) {
+                src
+                height
+                width
+              }
+            }
+          }
         }
       }
     }

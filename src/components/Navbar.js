@@ -7,15 +7,14 @@ import SpringMenu from './Parallax/Menu'
 
 //https://images.unsplash.com/${item.url}&auto=format&fit=crop
 
-const image = "https://images.unsplash.com/photo-1544511916-0148ccdeb877?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1901&q=80i&auto=format&fit=crop"
+const offline = "https://images.unsplash.com/photo-1544511916-0148ccdeb877?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1901&q=80i&auto=format&fit=crop"
 
-const ImageItem = ({ url, type }) => {
+const ImageItem = ({ url, type, back, image }) => {
   const styles = {
-    backgroundImage: `url(${url})`,
+    backgroundImage: `url(${image})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     height: "100%",
-    opacity: 0.5,
   };
 
   return <ImageContainer style={styles}>
@@ -25,17 +24,23 @@ const ImageItem = ({ url, type }) => {
           color: 'white',
           flexWrap: 'wrap',
           width: '30%',
+          margin: 0,
+          padding: 0,
         }}
       >
         {type}
       </p>
+      {back && <StyledLink to={back}>
+          explore
+        </StyledLink>
+      }
     </SlopeEndGradient>
   </ImageContainer>;
 };
 
-const Navbar = ({ menu, onMenu, type }) => (
+const Navbar = ({ menu, onMenu, type, back, image }) => (
   <Wrapper>
-    <ImageItem url={image} type={type} />
+    <ImageItem url={image} type={type} back={back} image={image ? image.fluid.src : offline} />
     <Header>
       <div style={{ width: '100px', display: 'flex', justifyContent: 'center' }}>
         <img style={{ width: '40px', height: '40px' }} src="../favicons/android-chrome-192x192.png" />
@@ -49,9 +54,17 @@ const Navbar = ({ menu, onMenu, type }) => (
   </Wrapper>
 )
 
+const StyledLink = styled(Link)`
+  color: white;
+  width: 30%;
+  fontSize: 40px;
+  margin: 0;
+  padding: 0;
+`
+
 const SlopeContainer = styled.div`
   position: absolute;
-  z-index: -1;
+  z-index: 5;
   width: 100%;
   height: 400px;
 `
@@ -61,10 +74,12 @@ const SlopeEnd = styled(SlopeContainer)`
 `
 
 const SlopeEndGradient = styled(SlopeEnd)`
-  background: green;
+  background: linear-gradient(to right, deeppink 0%, red 100%);
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  opacity: 0.92;
 `
 
 const ImageContainer = styled.div`
@@ -104,4 +119,5 @@ Navbar.propTypes = {
   menu: PropTypes.bool.isRequired,
   onMenu: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
 }

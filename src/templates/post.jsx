@@ -2,18 +2,22 @@ import React from "react"
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link, graphql } from "gatsby"
+import Img from 'gatsby-image'
+
 import { SEO, TemplateLayout } from '../components'
 
 import website from '../../config'
 
 const Post = ({ data: { prismicPost }, location }) => {
   const { data } = prismicPost
+  const image = data.image.localFile.childImageSharp
+
   let categories = false
   if (data.categories[0].category) {
     categories = data.categories.map(c => c.category.document[0].data.name)
   }
   return (
-    <TemplateLayout type={data.title.text}>
+    <TemplateLayout type={data.title.text} back="/blog/" image={image}>
       <SEO
         title={`${data.title.text} | ${website.siteTitleAlt}`}
         pathname={location.pathname}
@@ -80,6 +84,20 @@ export const pageQuery = graphql`
         }
         content {
           html
+        }
+        image {
+          localFile {
+            childImageSharp {
+              fluid(maxWidth: 1080, quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+              resize(width: 1920, quality: 90) {
+                src
+                height
+                width
+              }
+            }
+          }
         }
       }
     }
