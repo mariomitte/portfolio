@@ -165,7 +165,7 @@ Card.propTypes = {
   onPop: PropTypes.func,
   onToggle: PropTypes.func,
   data: PropTypes.array,
-  at: PropTypes.array.isRequired,
+  at: PropTypes.string.isRequired,
 }
 
 export default Card;

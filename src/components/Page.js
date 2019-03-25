@@ -7,6 +7,8 @@ import { graphql } from 'gatsby'
 import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
 import styled from 'styled-components'
 // import Overlay from './Parallax/Overlay'
+import { FirebaseContext } from './Firebase'
+import { withFirebase } from './Firebase/context'
 
 import FooterMenu from './Parallax/Overlay/FooterMenu'
 
@@ -25,6 +27,57 @@ const ImageItem = ({ url }) => {
 
   return <ImageContainer style={styles} />;
 };
+
+class Stars extends React.Component {
+  state = {
+    loading: false,
+    stars: [],
+  }
+
+  componentDidMount() {
+    this.setState({ loading: true });
+    console.log(this.props.firebase.stars())
+
+    this.props.firebase.stars().on('value', snapshot => {
+      const object = snapshot.val()
+
+      if(object) {
+        const star = Object.keys(object).map(key => ({
+          ...object[key],
+          uid: key,
+        }))
+        this.setState({
+          stars: star,
+          loading: false,
+        });
+      } else {
+        this.setState({ stars: null, loading: false });
+      }
+    })
+  }
+
+  render() {
+    const { loading, stars } = this.state
+    console.log(stars)
+
+    return (
+      <ParallaxLayer offset={0} speed={0.4}>
+        <React.Fragment>
+          <div style={{ position: 'absolute', bottom: '100px', right: '100px' }}>
+            {stars[0] ?
+              (<h1>Stars: { stars[0].value }</h1>
+              ) : (
+                <h1>Loading...</h1>
+              )
+            }
+          </div>
+        </React.Fragment>
+      </ParallaxLayer>
+    )
+  }
+}
+
+const Golden = withFirebase(Stars)
 
 class Page extends React.Component {
   render() {
@@ -71,6 +124,8 @@ class Page extends React.Component {
             <FooterMenu index={index} color={color} data="" />
           </React.Fragment>
         </ParallaxLayer>
+
+        <Golden />
       </React.Fragment>
     );
   }

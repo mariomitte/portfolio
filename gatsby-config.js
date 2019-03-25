@@ -35,7 +35,7 @@ module.exports = {
       resolve: 'gatsby-source-prismic',
       options: {
         repositoryName: 'marioproject',
-        accessToken: `${process.env.API_KEY}`,
+        accessToken: `${process.env.PRISMIC_API_KEY}`,
         // Get the correct URLs in blog posts
         linkResolver: ({ node, key, value }) => doc => {
 
