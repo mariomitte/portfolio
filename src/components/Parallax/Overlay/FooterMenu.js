@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { StaticQuery, graphql } from 'gatsby'
+
 import Card from '../Card'
 import Button from '../ButtonAction'
 import ArrowItem from '../ArrowItem'
-
 import BlogPosts from './BlogPosts'
 import Projects from './Projects'
 
@@ -24,11 +24,15 @@ class FooterMenu extends React.Component {
 
   render() {
     const { toggle, pop } = this.state
-    const { index, color } = this.props
+    const { index, color, onModal } = this.props
 
     if(index === 0) {
       return (
-        <Wrapper />
+        <Wrapper onClick={onModal}>
+          <Star>
+            Show me your love
+          </Star>
+        </Wrapper>
       )
     }
     if(index === 1) {
@@ -80,6 +84,20 @@ class FooterMenu extends React.Component {
     }
   }
 }
+
+const Star = styled.div`
+  cursor: pointer;
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  flex: wrap;
+  align-items: center;
+  justify-content: center;
+`
 
 const Wrapper = styled.div`
   font-family: 'Kanit', sans-serif;

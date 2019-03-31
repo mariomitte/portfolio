@@ -36,7 +36,7 @@ class Index extends React.Component {
     const lastIndex = items - 1
     const shouldResetIndex = index === lastIndex
     const newIndex = shouldResetIndex ? 0 : index + 1
-    this.setState(prevState => ({ index: newIndex }))
+    this.setState(prevState => ({ index: newIndex, modal: false }))
     this.scroll(newIndex)
   }
   prevIndex = () => {
@@ -44,7 +44,7 @@ class Index extends React.Component {
     const lastIndex = items - 1
     const shouldResetIndex = index === 0
     const newIndex = shouldResetIndex ? lastIndex : index - 1
-    this.setState(prevState => ({ index: newIndex }))
+    this.setState(prevState => ({ index: newIndex, modal: false }))
     this.scroll(newIndex)
   }
 
@@ -53,6 +53,7 @@ class Index extends React.Component {
     const {
       data: { homepage },
     } = this.props
+    console.log(modal)
 
     let pageItem = homepage.data.page.map((page, i) => {
       return (
@@ -67,6 +68,8 @@ class Index extends React.Component {
           image={page.image.url}
           color={gradients[index]}
           index={index}
+          modal={modal}
+          onModal={this.modal}
         />
       )
     })
@@ -78,7 +81,7 @@ class Index extends React.Component {
           <Parallax className="container" ref="parallax" pages={items} horizontal scrolling={false}>
             {pageItem}
           </Parallax>
-          <Overlay menu={menu} onMenu={this.menu} prevIndex={this.prevIndex} nextIndex={this.nextIndex} color={gradients[index]} />
+          <Overlay menu={menu} onMenu={this.menu} prevIndex={this.prevIndex} nextIndex={this.nextIndex} color={gradients[index]} modal={modal} onModal={this.modal} />
         </Wrapper>
       </ThemeProvider>
     );

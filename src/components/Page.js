@@ -7,24 +7,13 @@ import { graphql } from 'gatsby'
 import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
 import styled from 'styled-components'
 // import Overlay from './Parallax/Overlay'
-import { FirebaseContext } from './Firebase'
-import { withFirebase } from './Firebase/context'
 
 import FooterMenu from './Parallax/Overlay/FooterMenu'
+import Star from './Parallax/Overlay/Star'
 
 import 'typeface-raleway'
 import theme from '../../config/theme'
 import { Reset } from '../styles/reset'
-
-const MyStars = ({ children }) => (
-  <ParallaxLayer offset={0} speed={0.4}>
-    <React.Fragment>
-      <div style={{ position: 'absolute', bottom: '100px', right: '100px' }}>
-        {children}
-      </div>
-    </React.Fragment>
-  </ParallaxLayer>
-)
 
 const ImageItem = ({ url }) => {
   const styles = {
@@ -38,64 +27,18 @@ const ImageItem = ({ url }) => {
   return <ImageContainer style={styles} />;
 };
 
-class Stars extends React.Component {
-  state = {
-    loading: false,
-    count: "",
-    total: "",
-  }
-
-  componentDidMount() {
-    this.setState({ loading: true });
-    // console.log(this.props.firebase.stars())
-    let summed = 0
-
-    this.props.firebase.stars().on('value', snapshot => {
-      const object = snapshot.val()
-      // console.log("-- Stars object --", object)
-
-      if(object) {
-        // const star = Object.keys(object).map(key => ({
-        //   ...object[key],
-        //   uid: key,
-        // }))
-        const length = Object.keys(object).length
-        for (var key in object) {
-          summed += object[key].value
-        }
-
-        this.setState({
-          count: length,
-          total: summed,
-          loading: false,
-        });
-      } else {
-        this.setState({ count: null, total: 0, loading: false });
-      }
-    })
-  }
-
-  render() {
-    const { loading, count, total } = this.state
-    // <h1>Stars: { stars[0].value }</h1>
-    console.log(total)
-
-    return (
-      <MyStars children={<h1>Stars: { count } | {total}</h1>} />
-    )
-  }
-}
-
-const Golden = withFirebase(Stars)
-
 class Page extends React.Component {
   render() {
-    const { index, offset, gradient, caption, first, second, image, repeatColor, color } = this.props
+    const { index, offset, gradient, caption, first, second, image, repeatColor, color, modal, onModal } = this.props
 
     return (
       <React.Fragment>
         <ParallaxLayer offset={offset} speed={0.2}>
-          <SlopeBegin />
+          <SlopeBegin>
+            <Stats onClick={onModal}>
+              <Star modal={modal} />
+            </Stats>
+          </SlopeBegin>
           <Line />
         </ParallaxLayer>
 
@@ -130,15 +73,31 @@ class Page extends React.Component {
         <ParallaxLayer offset={offset} speed={0.4}>
           <React.Fragment>
             <Line />
-            <FooterMenu index={index} color={color} data="" />
+            <FooterMenu index={index} color={color} data="" onModal={onModal} />
           </React.Fragment>
         </ParallaxLayer>
 
-        <Golden />
+        {modal && <ParallaxLayer offset={offset} speed={0.2}>
+          <SlopeBegin>
+            <Stats onClick={onModal}>
+              <Star modal={modal} />
+            </Stats>
+          </SlopeBegin>
+          <Line />
+        </ParallaxLayer>}
       </React.Fragment>
     );
   }
 }
+
+const Stats = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+`;
 
 const Line = styled.div`
   position: absolute;
@@ -269,4 +228,5 @@ Page.propTypes = {
   gradient: PropTypes.string.isRequired,
   repeatColor: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
+  onModal: PropTypes.func.isRequired,
 }

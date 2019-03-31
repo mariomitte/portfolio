@@ -2,17 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import theme from '../../../../config/theme'
+import { FaStar } from 'react-icons/fa';
 
 import SpringMenu from '../Menu'
 import FooterMenu from './FooterMenu'
 import FooterPage from './FooterPage'
 import ArrowItem from '../ArrowItem'
 
-const Overlay = ({ color, menu, onMenu, prevIndex, nextIndex }) => {
+const Overlay = ({ color, menu, onMenu, prevIndex, nextIndex, modal, onModal }) => {
   return (
     <React.Fragment>
       <Vertical>
-          <Column style={{ opacity: 0.3, borderRight: '1px solid whitesmoke' }}>
+        <Column style={{ opacity: 0.3, borderRight: '1px solid whitesmoke' }}>
             <div style={{ marginTop: '10px', alignItems: 'center'}}>
               <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <img style={{ width: '40px', height: '40px' }} src="favicons/android-chrome-192x192.png" />
@@ -96,6 +97,8 @@ Overlay.propTypes = {
   onMenu: PropTypes.func.isRequired,
   prevIndex: PropTypes.func.isRequired,
   nextIndex: PropTypes.func.isRequired,
+  modal: PropTypes.bool.isRequired,
+  onModal: PropTypes.func.isRequired,
 }
 
 export default Overlay;
