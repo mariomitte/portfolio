@@ -16,6 +16,16 @@ import 'typeface-raleway'
 import theme from '../../config/theme'
 import { Reset } from '../styles/reset'
 
+const MyStars = ({ children }) => (
+  <ParallaxLayer offset={0} speed={0.4}>
+    <React.Fragment>
+      <div style={{ position: 'absolute', bottom: '100px', right: '100px' }}>
+        {children}
+      </div>
+    </React.Fragment>
+  </ParallaxLayer>
+)
+
 const ImageItem = ({ url }) => {
   const styles = {
     backgroundImage: `url(${url})`,
@@ -31,48 +41,47 @@ const ImageItem = ({ url }) => {
 class Stars extends React.Component {
   state = {
     loading: false,
-    stars: [],
+    count: "",
+    total: "",
   }
 
   componentDidMount() {
     this.setState({ loading: true });
-    console.log(this.props.firebase.stars())
+    // console.log(this.props.firebase.stars())
+    let summed = 0
 
     this.props.firebase.stars().on('value', snapshot => {
       const object = snapshot.val()
+      // console.log("-- Stars object --", object)
 
       if(object) {
-        const star = Object.keys(object).map(key => ({
-          ...object[key],
-          uid: key,
-        }))
+        // const star = Object.keys(object).map(key => ({
+        //   ...object[key],
+        //   uid: key,
+        // }))
+        const length = Object.keys(object).length
+        for (var key in object) {
+          summed += object[key].value
+        }
+
         this.setState({
-          stars: star,
+          count: length,
+          total: summed,
           loading: false,
         });
       } else {
-        this.setState({ stars: null, loading: false });
+        this.setState({ count: null, total: 0, loading: false });
       }
     })
   }
 
   render() {
-    const { loading, stars } = this.state
-    console.log(stars)
+    const { loading, count, total } = this.state
+    // <h1>Stars: { stars[0].value }</h1>
+    console.log(total)
 
     return (
-      <ParallaxLayer offset={0} speed={0.4}>
-        <React.Fragment>
-          <div style={{ position: 'absolute', bottom: '100px', right: '100px' }}>
-            {stars[0] ?
-              (<h1>Stars: { stars[0].value }</h1>
-              ) : (
-                <h1>Loading...</h1>
-              )
-            }
-          </div>
-        </React.Fragment>
-      </ParallaxLayer>
+      <MyStars children={<h1>Stars: { count } | {total}</h1>} />
     )
   }
 }
