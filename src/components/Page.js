@@ -79,8 +79,8 @@ class Page extends React.Component {
 
         {modal && <ParallaxLayer offset={offset} speed={0.2}>
           <SlopeBegin>
-            <Stats onClick={onModal}>
-              <Star modal={modal} />
+            <Stats>
+              <Star modal={modal} onModal={onModal} />
             </Stats>
           </SlopeBegin>
           <Line />

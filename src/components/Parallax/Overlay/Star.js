@@ -20,6 +20,8 @@ class Star extends React.Component {
     loading: false,
     count: "",
     total: "",
+    starName: "",
+    starValue: 0,
   }
 
   componentDidMount() {
@@ -27,9 +29,8 @@ class Star extends React.Component {
     // console.log(this.props.firebase.stars())
     let summed = 0
 
-    this.props.firebase.stars().on('value', snapshot => {
+    this.props.firebase.stars().once('value', snapshot => {
       const object = snapshot.val()
-      // console.log("-- Stars object --", object)
 
       if(object) {
         // const star = Object.keys(object).map(key => ({
@@ -38,7 +39,7 @@ class Star extends React.Component {
         // }))
         const length = Object.keys(object).length
         for (var key in object) {
-          summed += object[key].value
+          summed += parseInt(object[key].value)
         }
 
         this.setState({
@@ -52,18 +53,56 @@ class Star extends React.Component {
     })
   }
 
+  componentWillUnmount() {
+    this.props.firebase.star().off();
+  }
+
+  onChangeName = event => {
+    this.setState({ starName: event.target.value });
+  };
+
+  onChangeValue = () => {
+    this.setState( prevState => ({ starValue: prevState.starValue === 5 ? 5 : prevState.starValue + 1 }));
+  };
+
+  onCreateStar = event => {
+    this.props.firebase.star().push({
+      uid: this.state.starName,
+      value: this.state.starValue,
+    });
+
+    this.setState({ starName: '', starValue: '' });
+
+    this.props.onModal()
+
+    event.preventDefault();
+  };
+
   render() {
-    const { loading, count, total } = this.state
-    const { modal } = this.props
+    const { loading, count, total, starName, starValue } = this.state
+    const { modal, onModal } = this.props
     // <h1>Stars: { stars[0].value }</h1>
+    console.log(starValue)
 
     return (
       <React.Fragment>
-        {modal && <Stats onClick={this.toggle}>
+        {modal && <Stats>
           <Box>
-            <span>{ count }</span>
-            <FaStar color="yellow" size="100%" />
-            <span>+{total}</span>
+            <button style={{ marginBottom: '3rem' }} onClick={onModal}>close</button>
+            <span>You haven't given any stars, try changing that by hitting the star!</span>
+            <span>{starValue}</span>
+            <FaStar style={{ cursor: 'pointer' }} color="yellow" size="50%" onClick={onModal} onClick={this.onChangeValue} />
+            <span>+{total} | { count }</span>
+            <form style={{ display: 'flex', flexDirection: 'column', marginTop: '1rem' }} onSubmit={this.onCreateStar}>
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={starName}
+                onChange={this.onChangeName}
+              />
+              <button type="submit">Send</button>
+            </form>
           </Box>
         </Stats>}
       </React.Fragment>
@@ -77,12 +116,12 @@ const Box = styled.div`
   justify-content: center;
   align-items: center;
   width: 50%;
-  height: 60%;
+  height: 50%;
 `;
 
 const Stats = styled.div`
-  cursor: pointer;
   position: absolute;
+  z-index: 999;
   left: 50px;
   top: 0;
   bottom: 52px;

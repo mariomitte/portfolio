@@ -39,7 +39,7 @@ class Firebase {
   }
 
   // *** Stars API ***
-  star = uid => this.db.ref(`stars/${uid}`);
+  star = () => this.db.ref(`stars`);
   stars = () => this.db.ref('stars');
 }
 
