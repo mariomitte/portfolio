@@ -4,10 +4,11 @@ import styled from 'styled-components'
 import { Link } from 'gatsby'
 
 import SpringMenu from './Parallax/Menu'
+// import Image from './NavbarOfflineImage'
 
 //https://images.unsplash.com/${item.url}&auto=format&fit=crop
 
-const offline = "https://images.unsplash.com/photo-1544511916-0148ccdeb877?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1901&q=80i&auto=format&fit=crop"
+const offline = "/green.jpg"
 
 const ImageItem = ({ url, type, back, image }) => {
   const styles = {
@@ -19,17 +20,9 @@ const ImageItem = ({ url, type, back, image }) => {
 
   return <ImageContainer style={styles}>
     <SlopeEndGradient>
-      <p style={{
-          fontSize: '40px',
-          color: 'white',
-          flexWrap: 'wrap',
-          width: '30%',
-          margin: 0,
-          padding: 0,
-        }}
-      >
+      <Paragraph>
         {type}
-      </p>
+      </Paragraph>
       {back && <StyledLink to={back}>
           explore
         </StyledLink>
@@ -38,21 +31,36 @@ const ImageItem = ({ url, type, back, image }) => {
   </ImageContainer>;
 };
 
-const Navbar = ({ menu, onMenu, type, back, image }) => (
-  <Wrapper>
-    <ImageItem url={image} type={type} back={back} image={image ? image.fluid.src : offline} />
-    <Header>
-      <div style={{ width: '100px', display: 'flex', justifyContent: 'center' }}>
-        <img style={{ width: '40px', height: '40px' }} src="../favicons/android-chrome-192x192.png" />
-      </div>
-      <div style={{ marginLeft: '50', width: '100px', height: '40px', display: 'flex', justifyContent: 'center' }}>
-        <Menu onClick={onMenu}>
-          <SpringMenu menu={menu} />
-        </Menu>
-      </div>
-    </Header>
-  </Wrapper>
-)
+const Navbar = ({ menu, onMenu, type, back, image }) => {
+  return (
+    <Wrapper>
+      <ImageItem url={image} type={type} back={back} image={image ? image.fluid.src : offline} />
+      <Header>
+        <Column>
+          <img style={{ width: '40px', height: '40px' }} src="../favicons/android-chrome-192x192.png" />
+        </Column>
+        <ColumnWrapper>
+          <Menu onClick={onMenu}>
+            <SpringMenu menu={menu} />
+          </Menu>
+        </ColumnWrapper>
+      </Header>
+    </Wrapper>
+  )
+}
+
+const Paragraph = styled.p`
+  font-size: 40px;
+  color: white;
+  flex-wrap: wrap;
+  width: 30%;
+  margin: 0;
+  padding: 0;
+
+  @media (max-width: 700px) {
+    font-size: 25px;
+  }
+`
 
 const StyledLink = styled(Link)`
   color: white;
@@ -96,6 +104,17 @@ const Wrapper = styled.div`
   background-repeat: no-repeat;
 `
 
+const Column = styled.div`
+  width: 75px;
+  display: flex;
+  justify-content: center;
+`
+
+const ColumnWrapper = styled(Column)`
+  margin-left: 50;
+  height: 40px;
+`
+
 const Header = styled.div`
   position: fixed;
   z-index: 99;
@@ -106,6 +125,7 @@ const Header = styled.div`
   padding: 10px 0;
   margin-bottom: 1rem;
 `
+
 const Menu = styled.div`
   position: absolute;
   width: 40px;
@@ -119,5 +139,5 @@ Navbar.propTypes = {
   menu: PropTypes.bool.isRequired,
   onMenu: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
+  image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 }

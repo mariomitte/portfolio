@@ -16,6 +16,7 @@ exports.createPages = async ({ graphql, actions }) => {
   // Path to templates
   const postTemplate = require.resolve('./src/templates/post.jsx')
   const projectTemplate = require.resolve('./src/templates/project.jsx')
+  const placesTemplate = require.resolve('./src/templates/places.jsx')
 
   const result = await wrapper(
     graphql(`
@@ -41,6 +42,16 @@ exports.createPages = async ({ graphql, actions }) => {
       component: projectTemplate,
       context: {
         uid: project.node.uid,
+      },
+    })
+  })
+
+  result.data.places.edges.forEach(places => {
+    createPage({
+      path: `/places/${places.node.uid}`,
+      component: placesTemplate,
+      context: {
+        uid: places.node.uid,
       },
     })
   })

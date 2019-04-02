@@ -8,6 +8,7 @@ import Button from '../ButtonAction'
 import ArrowItem from '../ArrowItem'
 import BlogPosts from './BlogPosts'
 import Projects from './Projects'
+import Places from './Places'
 
 import 'typeface-raleway'
 const items = ["home page", "blog", "about me", "contact"];
@@ -45,7 +46,7 @@ class FooterMenu extends React.Component {
             onToggle={this.toggle}
           />
           <div style={{ height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <p style={{ padding: 0, margin: 0 }}>#mario</p>
+            <Paragraph>#mario</Paragraph>
             <Button
               color={color}
               children={<span>Posts</span>}
@@ -79,11 +80,36 @@ class FooterMenu extends React.Component {
     }
     if(index === 3) {
       return (
-        <Wrapper />
+        <Wrapper>
+          <Places
+            pop={pop}
+            toggle={toggle}
+            onPop={this.pop}
+            onToggle={this.toggle}
+          />
+          <div style={{ height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <Paragraph>#places</Paragraph>
+            <Button
+              color={color}
+              children={<span>Places</span>}
+              arrow={<ArrowItem color="true" direction={pop ? "down" : "up"} />}
+              onClick={this.pop}
+            />
+          </div>
+        </Wrapper>
       )
     }
   }
 }
+
+const Paragraph = styled.p`
+  padding: 0;
+  margin: 0;
+
+  @media (max-width: 700px) {
+    display: none;
+  }
+`
 
 const Star = styled.div`
   cursor: pointer;
@@ -106,6 +132,11 @@ const Wrapper = styled.div`
   left: 140px;
   width: 30%;
   color: white;
+
+  @media (max-width: 700px) {
+    left: 0;
+    width: 50%;
+  }
 `
 
 export default FooterMenu;

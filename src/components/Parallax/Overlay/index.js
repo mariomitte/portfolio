@@ -13,13 +13,13 @@ const Overlay = ({ color, menu, onMenu, prevIndex, nextIndex, modal, onModal }) 
   return (
     <React.Fragment>
       <Vertical>
-        <Column style={{ opacity: 0.3, borderRight: '1px solid whitesmoke' }}>
+        <ColumnBorder>
             <div style={{ marginTop: '10px', alignItems: 'center'}}>
               <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <img style={{ width: '40px', height: '40px' }} src="favicons/android-chrome-192x192.png" />
               </div>
             </div>
-          </Column>
+          </ColumnBorder>
           <Column style={{ marginTop: '10px', alignItems: 'center' }}>
             <Menu onClick={onMenu}>
               <SpringMenu menu={menu} />
@@ -57,13 +57,17 @@ const Button = styled.button`
 const Vertical = styled.div`
   position: absolute;
   top: 0;
-  bottom: 0;
+  height: 100%;
   left: 0;
   width: 200px;
   z-index: 20;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+
+  @media (max-width: 700px) {
+    height: 50px;
+    width: 150px;
+  }
 `
 
 const Column = styled.div`
@@ -71,6 +75,15 @@ const Column = styled.div`
   flex-direction: column;
   flex-basis: 100%;
   flex: 1;
+`
+
+const ColumnBorder = styled(Column)`
+  opacity: 0.3;
+  border-right: 1px solid whitesmoke;
+
+  @media (max-width: 700px) {
+    border-right: 0;
+  }
 `
 
 const Menu = styled.div`

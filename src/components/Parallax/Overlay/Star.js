@@ -88,10 +88,9 @@ class Star extends React.Component {
       <React.Fragment>
         {modal && <Stats>
           <Box>
-            <button style={{ marginBottom: '3rem' }} onClick={onModal}>close</button>
-            <span>You haven't given any stars, try changing that by hitting the star!</span>
+            <span style={{ marginBottom: '2rem' }}>Show your support giving me some stars!</span>
             <span>{starValue}</span>
-            <FaStar style={{ cursor: 'pointer' }} color="yellow" size="50%" onClick={onModal} onClick={this.onChangeValue} />
+            <FaStar style={{ cursor: 'pointer', margin: 0, padding: 0 }} color="yellow" size="60%" onClick={onModal} onClick={this.onChangeValue} />
             <span>+{total} | { count }</span>
             <form style={{ display: 'flex', flexDirection: 'column', marginTop: '1rem' }} onSubmit={this.onCreateStar}>
               <input
@@ -132,6 +131,10 @@ const Stats = styled.div`
   width: 60%;
   height: 100%;
   border: 0;
+
+  @media (max-width: 700px) {
+    left: 10px;
+  }
 `;
 
 export default withFirebase(Star);

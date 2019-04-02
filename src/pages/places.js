@@ -6,33 +6,27 @@ import { Link, graphql } from "gatsby"
 import TemplateLayout from '../components/TemplateLayout'
 import Header from '../components/Header';
 
-const Places = () => {
+const Places = ({ data }) => {
 
-  // let blogItem = data.allPrismicPost.edges.map((item, i) => {
-  //   let at = "/blog/"
-  //   return (
-  //     <StyledLink to={`${at}${item.node.uid}`} key={i}>
-  //       <PostList>
-  //         <Wrapper>
-  //           <Header
-  //             title="{item.node.data.title.text}"
-  //             span={item.node.data.date}
-  //           />
-  //         </Wrapper>
-  //       </PostList>
-  //     </StyledLink>
-  //   )
-  // })
-
-  // return (
-  //   <TemplateLayout type="Blog Posts">
-  //     {blogItem}
-  //   </TemplateLayout>
-  // );
+  let placesItem = data.allPrismicPlaces.edges.map((item, i) => {
+    let at = "/places/"
+    return (
+      <StyledLink to={`${at}${item.node.uid}`} key={i}>
+        <PostList>
+          <Wrapper>
+            <Header
+              title={item.node.data.title.text}
+              span={item.node.data.date}
+            />
+          </Wrapper>
+        </PostList>
+      </StyledLink>
+    )
+  })
 
   return (
-    <TemplateLayout type="Places I Visit">
-      <p>Places I visit</p>
+    <TemplateLayout type="Places">
+      {placesItem}
     </TemplateLayout>
   );
 }
@@ -61,3 +55,27 @@ const Wrapper = styled.div`
 `;
 
 export default Places;
+
+Places.propTypes = {
+  data: PropTypes.shape({
+    allPrismicPlaces: PropTypes.object.isRequired,
+  }).isRequired,
+}
+
+export const blogQuery = graphql`
+  query PlacesPageQuery {
+    allPrismicPlaces(sort: { fields: [data___date], order: DESC }) {
+      edges {
+        node {
+          uid
+          data {
+            title {
+              text
+            }
+            date
+          }
+        }
+      }
+    }
+  }
+`

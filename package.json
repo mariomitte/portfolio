@@ -22,15 +22,18 @@
     "gatsby-plugin-react-helmet": "^3.0.9",
     "gatsby-plugin-sharp": "^2.0.30",
     "gatsby-plugin-styled-components": "^3.0.7",
+    "gatsby-source-filesystem": "^2.0.28",
     "gatsby-source-prismic": "^2.3.0-alpha.3",
     "gatsby-transformer-sharp": "^2.1.17",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-helmet": "^5.2.0",
     "react-icons": "^3.5.0",
+    "react-player": "^1.10.0",
     "react-spring": "^8.0.15",
     "styled-components": "^4.1.3",
-    "typeface-raleway": "0.0.54"
+    "typeface-raleway": "0.0.54",
+    "video-react": "^0.13.6"
   },
   "devDependencies": {
     "prettier": "^1.16.4"

@@ -33,15 +33,6 @@ class Page extends React.Component {
 
     return (
       <React.Fragment>
-        <ParallaxLayer offset={offset} speed={0.2}>
-          <SlopeBegin>
-            <Stats onClick={onModal}>
-              <Star modal={modal} />
-            </Stats>
-          </SlopeBegin>
-          <Line />
-        </ParallaxLayer>
-
         <ParallaxLayer offset={offset} speed={-0.2}>
           <React.Fragment>
             <SlopeEndGradient gradient={gradient}>
@@ -55,36 +46,38 @@ class Page extends React.Component {
           </React.Fragment>
         </ParallaxLayer>
 
-        <NumberText offset={offset} speed={0.3}>
-          <SpanNumber>0{offset + 1}</SpanNumber>
-        </NumberText>
-
-        <ParallaxLayer offset={offset} speed={0.4}>
-          <Text>
-            <Caption>
-              {caption}
-            </Caption>
-            <StripeGradient gradient={gradient} />
-            <Description>{first}</Description>
-            <Second color={gradient}>{second}</Second>
-          </Text>
-        </ParallaxLayer>
-
-        <ParallaxLayer offset={offset} speed={0.4}>
-          <React.Fragment>
-            <Line />
-            <FooterMenu index={index} color={color} data="" onModal={onModal} />
-          </React.Fragment>
-        </ParallaxLayer>
-
-        {modal && <ParallaxLayer offset={offset} speed={0.2}>
+        <ParallaxLayer offset={offset} speed={0.2}>
           <SlopeBegin>
             <Stats>
               <Star modal={modal} onModal={onModal} />
             </Stats>
           </SlopeBegin>
           <Line />
-        </ParallaxLayer>}
+        </ParallaxLayer>
+
+        {!modal && <React.Fragment>
+          <NumberText offset={offset} speed={0.3}>
+            <SpanNumber>0{offset + 1}</SpanNumber>
+          </NumberText>
+
+          <ParallaxLayer offset={offset} speed={0.4}>
+            <Text>
+              <Caption>
+                {caption}
+              </Caption>
+              <StripeGradient gradient={gradient} />
+              <Description>{first}</Description>
+              <Second color={gradient}>{second}</Second>
+            </Text>
+          </ParallaxLayer>
+
+          <ParallaxLayer offset={offset} speed={0.4}>
+            <React.Fragment>
+              <Line />
+              <FooterMenu index={index} color={color} data="" onModal={onModal} />
+            </React.Fragment>
+          </ParallaxLayer>
+        </React.Fragment>}
       </React.Fragment>
     );
   }
@@ -140,6 +133,10 @@ const BottomRightText = styled.span`
   height: 100%;
   width: 45%;
   color: black;
+
+  @media (max-width: 700px) {
+    display: none;
+  }
 `
 
 const SpanNumber = styled.span`
@@ -147,6 +144,10 @@ const SpanNumber = styled.span`
   display: inline-block;
   position: relative;
   transform: translate3d(-35%, 0, 0);
+
+  @media (max-width: 700px) {
+    display: none;
+  }
 `
 
 const SlopeContainer = styled.div`
@@ -178,8 +179,7 @@ const ImageContainer = styled.div`
 
 const Text = styled.div`
   position: absolute;
-  left: 0;
-  margin-left: 230px;
+  left: 230px;
   display: flex;
   flex-direction: column;
   font-family: 'Kanit', sans-serif;
@@ -187,6 +187,11 @@ const Text = styled.div`
   font-size: 1rem;
   color: white;
   width: 430px;
+
+  @media (max-width: 700px) {
+    left: 10px;
+    right: 10px;
+  }
 `
 
 const Paragraph = styled.p`
