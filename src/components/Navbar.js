@@ -1,14 +1,37 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Link } from 'gatsby'
+import { StaticQuery, gatsby, Link } from 'gatsby'
+import Img from 'gatsby-image'
 
 import SpringMenu from './Parallax/Menu'
-// import Image from './NavbarOfflineImage'
+import Image from './Image'
 
 //https://images.unsplash.com/${item.url}&auto=format&fit=crop
 
 const offline = "/green.jpg"
+
+// const ImageItem = ({ url, type, back, image }) => {
+//   const styles = {
+//     backgroundImage: `url(${image})`,
+//     backgroundSize: "cover",
+//     backgroundPosition: "center",
+//     height: "100%",
+//   };
+//
+//   return <ImageContainer style={styles}>
+//     <SlopeEndGradient>
+//       <Paragraph>
+//         {type}
+//       </Paragraph>
+//       {back && <StyledLink to={back}>
+//           explore
+//         </StyledLink>
+//       }
+//     </SlopeEndGradient>
+//   </ImageContainer>;
+// };
+
 
 const ImageItem = ({ url, type, back, image }) => {
   const styles = {
