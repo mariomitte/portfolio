@@ -7,8 +7,6 @@ const config = {
   databaseURL: process.env.REACT_APP_DATABASE_URL,
 };
 
-let firebaseInstance
-
 class Firebase {
   constructor() {
     if (!app.length) {

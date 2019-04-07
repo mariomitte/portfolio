@@ -1,11 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import theme from '../../../../config/theme'
-import { FaStar } from 'react-icons/fa';
 
 import SpringMenu from '../Menu'
-import FooterMenu from './FooterMenu'
 import FooterPage from './FooterPage'
 import ArrowItem from '../ArrowItem'
 
@@ -16,7 +13,7 @@ const Overlay = ({ color, menu, onMenu, prevIndex, nextIndex, modal, onModal }) 
         <ColumnBorder>
             <div style={{ marginTop: '10px', alignItems: 'center'}}>
               <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <img style={{ width: '40px', height: '40px' }} src="favicons/android-chrome-192x192.png" />
+                <img style={{ width: '40px', height: '40px' }} src="favicons/android-chrome-192x192.png" alt="favicons" />
               </div>
             </div>
           </ColumnBorder>

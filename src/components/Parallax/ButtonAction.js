@@ -1,9 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import theme from '../../../config/theme'
-
-import Card from './Card'
 
 const ButtonAction = ({ color, children, arrow, onClick }) => {
   if (arrow !== null) {

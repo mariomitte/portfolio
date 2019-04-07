@@ -1,9 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { StaticQuery, graphql } from 'gatsby'
 
-import Card from '../Card'
 import Button from '../ButtonAction'
 import ArrowItem from '../ArrowItem'
 import BlogPosts from './BlogPosts'
@@ -11,7 +9,6 @@ import Projects from './Projects'
 import Places from './Places'
 
 import 'typeface-raleway'
-const items = ["home page", "blog", "about me", "contact"];
 
 class FooterMenu extends React.Component {
   state = {
@@ -67,7 +64,7 @@ class FooterMenu extends React.Component {
             onToggle={this.toggle}
           />
           <Position>
-            <p style={{ padding: 0, margin: 0 }}></p>
+            <Paragraph></Paragraph>
             <Button
               color={color}
               children={<span>Projects</span>}
@@ -117,20 +114,6 @@ const Paragraph = styled.p`
   @media (max-width: 700px) {
     display: none;
   }
-`
-
-const Star = styled.div`
-  cursor: pointer;
-  position: absolute;
-  width: 100%;
-  height: 50px;
-  left: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  flex: wrap;
-  align-items: center;
-  justify-content: center;
 `
 
 const Wrapper = styled.div`

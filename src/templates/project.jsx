@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import { SEO, TemplateLayout } from '../components'
 
 import website from '../../config'

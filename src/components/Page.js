@@ -3,8 +3,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
-import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
+import { ParallaxLayer } from 'react-spring/renderprops-addons'
 import styled from 'styled-components'
 // import Overlay from './Parallax/Overlay'
 
@@ -12,8 +11,6 @@ import FooterMenu from './Parallax/Overlay/FooterMenu'
 import Star from './Parallax/Overlay/Star'
 
 import 'typeface-raleway'
-import theme from '../../config/theme'
-import { Reset } from '../styles/reset'
 
 const ImageItem = ({ url }) => {
   const styles = {
@@ -29,7 +26,7 @@ const ImageItem = ({ url }) => {
 
 class Page extends React.Component {
   render() {
-    const { index, offset, gradient, caption, first, second, image, repeatColor, color, modal, onModal } = this.props
+    const { index, offset, gradient, caption, first, second, image, color, modal, onModal } = this.props
 
     return (
       <React.Fragment>
@@ -63,9 +60,11 @@ class Page extends React.Component {
           <ParallaxLayer offset={offset} speed={0.4}>
             <Text>
               <Caption>
-                {caption}
+                <Paragraph>
+                  {caption}
+                </Paragraph>
+                <StripeGradient gradient={gradient} />
               </Caption>
-              <StripeGradient gradient={gradient} />
               <Description>{first}</Description>
               <Second color={gradient}>{second}</Second>
             </Text>
@@ -105,7 +104,7 @@ const Line = styled.div`
 
 const Stripe = styled.div`
   height: 4px;
-  width: auto;
+  width: 100%;
   margin-bottom: 2em;
 `
 
@@ -200,12 +199,15 @@ const Paragraph = styled.p`
   flex-direction: row;
   flex-flow: row wrap;
   margin: 0;
+
 `
 
-const Caption = styled(Paragraph)`
+const Caption = styled.div`
   font-size: 1rem;
   margin: 0.7em 0;
   color: whitesmoke;
+  width: 45%;
+
 `
 
 const Description = styled(Paragraph)`
@@ -231,7 +233,6 @@ Page.propTypes = {
   second: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   gradient: PropTypes.string.isRequired,
-  repeatColor: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   onModal: PropTypes.func.isRequired,
 }

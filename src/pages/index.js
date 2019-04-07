@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
-import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons'
+import { Parallax } from 'react-spring/renderprops-addons'
 
 import Page from '../components/Page'
 import Overlay from '../components/Parallax/Overlay'
@@ -11,7 +11,7 @@ import theme from '../../config/theme'
 import '../components/Parallax/style.css'
 import { Reset } from '../styles/reset'
 
-const gradients = [ "pink", "teal", "blue", "orange" ]
+const gradientsOffline = [ "pink", "teal", "blue", "orange" ]
 
 class Index extends React.Component {
   state = {
@@ -19,6 +19,13 @@ class Index extends React.Component {
     index: 0,       // keep track of scroll index in parallax page
     menu: false,    // flag for open and close menu
     modal: false,   // flag for poping a modal dynamic with content
+    gradients: [],
+  }
+
+  componentDidMount() {
+    let color = this.props.data.homepage.data.page.map((item, i) => item.color)
+    // console.log("-- Index --", color.page.map((item, i) => item.color))
+    this.setState({ gradients: color })
   }
 
   // parallax method to access new page
@@ -49,24 +56,22 @@ class Index extends React.Component {
   }
 
   render() {
-    const { items, index, menu, modal } = this.state
+    const { items, index, menu, modal, gradients } = this.state
     const {
       data: { homepage },
     } = this.props
-    console.log(modal)
 
     let pageItem = homepage.data.page.map((page, i) => {
       return (
         <Page
           key={i}
           offset={i}
-          gradient={gradients[i]}
-          repeatColor={theme.colors.background}
+          gradient={page.color}
           caption={page.caption}
           first={page.first.text}
           second={page.second.text}
           image={page.image.url}
-          color={gradients[index]}
+          color={page.color}
           index={index}
           modal={modal}
           onModal={this.modal}
@@ -81,7 +86,7 @@ class Index extends React.Component {
           <Parallax className="container" ref="parallax" pages={items} horizontal scrolling={false}>
             {pageItem}
           </Parallax>
-          <Overlay menu={menu} onMenu={this.menu} prevIndex={this.prevIndex} nextIndex={this.nextIndex} color={gradients[index]} modal={modal} onModal={this.modal} />
+          <Overlay menu={menu} onMenu={this.menu} prevIndex={this.prevIndex} nextIndex={this.nextIndex} color={gradients.length === 0 ? gradientsOffline[index] : gradients[index]} modal={modal} onModal={this.modal} />
         </Wrapper>
       </ThemeProvider>
     );
@@ -206,6 +211,7 @@ export const pageQuery = graphql`
           image {
             url
           }
+          color
         }
       }
     }

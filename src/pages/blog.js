@@ -31,8 +31,6 @@ const Blog = ({ data }) => {
   );
 }
 
-const Paragraph = styled.p``
-
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: black;

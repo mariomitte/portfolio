@@ -6,7 +6,6 @@ import Img from 'gatsby-image'
 const Gallery = ({ data }) => {
   // console.log(data[0].items.map(item => item.gallery_image.url))
   let gallery = data[0].items
-  console.log(gallery)
 
   return (
     <Wrapper>

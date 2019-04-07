@@ -1,16 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
-import { Spring, Keyframes, animated, config } from "react-spring/renderprops";
+import { Keyframes, animated, config } from "react-spring/renderprops";
 import delay from "delay";
 import styled from 'styled-components'
 import theme from '../../../../config/theme'
-
-const fast = {
-  ...config.stiff,
-  restSpeedThreshold: 1,
-  restDisplacementThreshold: 0.01
-};
 
 const Pop = Keyframes.Spring({
   // single items,
@@ -39,8 +33,6 @@ const KeyFramed = Keyframes.Trail({
   open: { delay: 100, to: { x: 0, opacity: 1 } },
   close: { to: { x: 20, opacity: 0 } }
 });
-
-const link = ["/", "/blog", "/about-me", "/contact"]
 
 const Items = ({ toggle, onClick, uid, title, date, at }) => {
   const state = toggle ? "open" : "close";

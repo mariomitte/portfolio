@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import { SEO, TemplateLayout, Video, Gallery } from '../components'
 
 import website from '../../config'
@@ -9,7 +9,6 @@ import website from '../../config'
 const Places = ({ data: { prismicPlaces }, location }) => {
   const { data } = prismicPlaces
   const image = data.image.localFile.childImageSharp.fluid
-  const video = '<iframe type="text/html" width="100%" height="500px" src=${data.embed.embed_url} frameborder="0"/>'
 
   return (
     <TemplateLayout type={data.title.text} back="/places/" image={image}>
@@ -21,11 +20,6 @@ const Places = ({ data: { prismicPlaces }, location }) => {
         article
       />
       <Wrapper>
-        <Container>
-          <PostList style={{ padding: '1rem 0', lineHeight: 2 }}>
-            <div dangerouslySetInnerHTML={{ __html: data.quick_content.html }} />
-          </PostList>
-        </Container>
         <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', width: '100%', height: '100%' }}>
           <Video src={data.embed.embed_url} />
         </div>

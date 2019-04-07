@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Spring,Keyframes, animated, config } from "react-spring/renderprops";
+import { Keyframes, animated, config } from "react-spring/renderprops";
 import delay from "delay";
 
 const Sidebar = Keyframes.Spring({

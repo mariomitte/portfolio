@@ -1,11 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { StaticQuery, gatsby, Link } from 'gatsby'
+import { StaticQuery, Link } from 'gatsby'
 import Img from 'gatsby-image'
 
 import SpringMenu from './Parallax/Menu'
-import Image from './Image'
 
 const ImageItem = ({ url, type, back, image }) => {
   if (image) {
@@ -72,7 +71,7 @@ const Navbar = ({ menu, onMenu, type, back, image }) => {
       <ImageItem url={image} type={type} back={back} image={image} />
       <Header>
         <Column>
-          <img style={{ width: '40px', height: '40px' }} src="../favicons/android-chrome-192x192.png" />
+          <img style={{ width: '40px', height: '40px' }} src="../favicons/android-chrome-192x192.png" alt="favicon"/>
         </Column>
         <ColumnWrapper>
           <Menu onClick={onMenu}>

@@ -1,6 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 import 'typeface-raleway'
 import theme from '../../config/theme'
