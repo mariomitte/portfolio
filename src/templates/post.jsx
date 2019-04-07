@@ -11,10 +11,11 @@ const Post = ({ data: { prismicPost }, location }) => {
   const { data } = prismicPost
   const image = data.image.localFile.childImageSharp.fluid
 
-  let categories = false
-  if (data.categories[0].category) {
-    categories = data.categories.map(c => c.category.document[0].data.name)
-  }
+  // let categories = false
+  // if (data.categories[0].category) {
+  //   categories = data.categories.map(c => c.category.document[0].data.name)
+  // }
+  
   return (
     <TemplateLayout type={data.title.text} back="/blog/" image={image}>
       <SEO

@@ -59,12 +59,5 @@ module.exports = {
         anonymize: true,
       },
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/src/assets`,
-        name: `assets`,
-      },
-    },
   ],
 }
