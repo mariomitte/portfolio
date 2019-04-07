@@ -17,6 +17,7 @@ const Post = ({ data: { prismicProjects }, location }) => {
         pathname={location.pathname}
         desc={data.description}
         node={prismicProjects}
+        image={image}
         article
       />
       <Wrapper>

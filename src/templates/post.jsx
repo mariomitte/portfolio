@@ -15,7 +15,7 @@ const Post = ({ data: { prismicPost }, location }) => {
   // if (data.categories[0].category) {
   //   categories = data.categories.map(c => c.category.document[0].data.name)
   // }
-  
+
   return (
     <TemplateLayout type={data.title.text} back="/blog/" image={image}>
       <SEO
@@ -23,6 +23,7 @@ const Post = ({ data: { prismicPost }, location }) => {
         pathname={location.pathname}
         desc={data.description}
         node={prismicPost}
+        image={image}
       />
       <Wrapper>
         <Container>

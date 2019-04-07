@@ -9,6 +9,7 @@ import website from '../../config'
 const Places = ({ data: { prismicPlaces }, location }) => {
   const { data } = prismicPlaces
   const image = data.image.localFile.childImageSharp.fluid
+  console.log(image.src)
 
   return (
     <TemplateLayout type={data.title.text} back="/places/" image={image}>
@@ -17,6 +18,7 @@ const Places = ({ data: { prismicPlaces }, location }) => {
         pathname={location.pathname}
         desc={data.description}
         node={prismicPlaces}
+        image={image}
         article
       />
       <Wrapper>

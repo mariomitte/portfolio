@@ -7,7 +7,7 @@ import Twitter from './Twitter'
 
 // Complete tutorial: https://www.gatsbyjs.org/docs/add-seo-component/
 
-const SEO = ({ title, desc, banner, pathname, article, node }) => {
+const SEO = ({ title, desc, banner, pathname, article, node, image }) => {
   const { site } = useStaticQuery(query)
 
   const {
@@ -147,7 +147,7 @@ const SEO = ({ title, desc, banner, pathname, article, node }) => {
       <Helmet title={seo.title}>
         <html lang={siteLanguage} />
         <meta name="description" content={seo.description} />
-        <meta name="image" content={seo.image} />
+        <meta name="image" content={ image ? image.src : seo.image} />
         <meta name="gatsby-starter" content="Gatsby Starter Prismic" />
         {/* Insert schema.org data conditionally (webpage/article) + everytime (breadcrumbs) */}
         {!article && <script type="application/ld+json">{JSON.stringify(schemaOrgWebPage)}</script>}
@@ -156,14 +156,14 @@ const SEO = ({ title, desc, banner, pathname, article, node }) => {
       </Helmet>
       <Facebook
         desc={seo.description}
-        image={seo.image}
+        image={image ? image.src : seo.image}
         title={seo.title}
         type={article ? 'article' : 'website'}
         url={seo.url}
         locale={siteLanguage}
         name={facebook}
       />
-      <Twitter title={seo.title} image={seo.image} desc={seo.description} username={twitter} />
+      <Twitter title={seo.title} image={image ? image.src : seo.image} desc={seo.description} username={twitter} />
     </>
   )
 }
@@ -177,6 +177,7 @@ SEO.propTypes = {
   pathname: PropTypes.string,
   article: PropTypes.bool,
   node: PropTypes.object,
+  image: PropTypes.object,
 }
 
 SEO.defaultProps = {
