@@ -11,8 +11,8 @@ const Image = () => (
           edges {
             node {
               childImageSharp {
-                fluid {
-                  src
+                fluid(maxWidth: 1080, quality: 90) {
+                  ...GatsbyImageSharpFluid
                 }
               }
             }

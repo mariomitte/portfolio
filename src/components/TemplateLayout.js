@@ -51,6 +51,10 @@ const Limits = styled.div`
   top: 300px;
   background-color: white;
   border-radius: 2px;
+
+  @media (max-width: 700px) {
+    width: 96%;
+  }
 `;
 
 const GlobalStyles = createGlobalStyle`

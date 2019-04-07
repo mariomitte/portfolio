@@ -7,57 +7,69 @@ import Img from 'gatsby-image'
 import SpringMenu from './Parallax/Menu'
 import Image from './Image'
 
-//https://images.unsplash.com/${item.url}&auto=format&fit=crop
-
-const offline = "/green.jpg"
-
-// const ImageItem = ({ url, type, back, image }) => {
-//   const styles = {
-//     backgroundImage: `url(${image})`,
-//     backgroundSize: "cover",
-//     backgroundPosition: "center",
-//     height: "100%",
-//   };
-//
-//   return <ImageContainer style={styles}>
-//     <SlopeEndGradient>
-//       <Paragraph>
-//         {type}
-//       </Paragraph>
-//       {back && <StyledLink to={back}>
-//           explore
-//         </StyledLink>
-//       }
-//     </SlopeEndGradient>
-//   </ImageContainer>;
-// };
-
-
 const ImageItem = ({ url, type, back, image }) => {
-  const styles = {
-    backgroundImage: `url(${image})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    height: "100%",
-  };
+  if (image) {
+    return (
+      <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex' }}>
+        <ImageContainer css={{ top: 0, left: 0, right: 0, bottom: 0 }} style={{ position: `absolute` }} fluid={image} />
+        <SlopeEndGradient>
+          <Paragraph>
+            {type}
+          </Paragraph>
+          {back && <StyledLink to={back}>
+              explore
+            </StyledLink>
+          }
+        </SlopeEndGradient>
+      </div>
+    )
+  } else {
+    return (
+      <StaticQuery
+        query={graphql`
+          query NavbarImageEmptyQuery {
+            prismicHomepage {
+              data {
+                image_header {
+                  localFile {
+                    childImageSharp {
+                      fluid(maxWidth: 1080, quality: 90) {
+                        ...GatsbyImageSharpFluid
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        `}
+        render={data => {
+          const offline = data.prismicHomepage.data.image_header.localFile.childImageSharp.fluid
 
-  return <ImageContainer style={styles}>
-    <SlopeEndGradient>
-      <Paragraph>
-        {type}
-      </Paragraph>
-      {back && <StyledLink to={back}>
-          explore
-        </StyledLink>
-      }
-    </SlopeEndGradient>
-  </ImageContainer>;
+          return (
+            <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex' }}>
+              <ImageContainer css={{ top: 0, left: 0, right: 0, bottom: 0 }} style={{ position: `absolute` }} fluid={offline} />
+              <SlopeEndGradient>
+                <Paragraph>
+                  {type}
+                </Paragraph>
+                {back && <StyledLink to={back}>
+                    explore
+                  </StyledLink>
+                }
+              </SlopeEndGradient>
+            </div>
+          )
+        }}
+      />
+    )
+  }
 };
 
 const Navbar = ({ menu, onMenu, type, back, image }) => {
   return (
     <Wrapper>
-      <ImageItem url={image} type={type} back={back} image={image ? image.fluid : offline} />
+      <ImageItem url={image} type={type} back={back} image={image} />
       <Header>
         <Column>
           <img style={{ width: '40px', height: '40px' }} src="../favicons/android-chrome-192x192.png" />
@@ -113,18 +125,18 @@ const SlopeEndGradient = styled(SlopeEnd)`
   opacity: 0.92;
 `
 
-const ImageContainer = styled.div`
+const ImageContainer = styled(Img)`
+  position: absolute;
+  z-index: -1;
   height: 100%;
   width: 100%;
-  right: 0;
+  left: 0;
   top: 0;
-  overflow: hidden;
 `
 
 const Wrapper = styled.div`
   height: 400px;
-  overflow: hidden;
-  background-repeat: no-repeat;
+  width: 100%;
 `
 
 const Column = styled.div`
