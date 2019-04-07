@@ -10,7 +10,7 @@ import website from '../../config'
 
 const Post = ({ data: { prismicPost }, location }) => {
   const { data } = prismicPost
-  const image = data.image.localFile.childImageSharp
+  const image = data.image.localFile.childImageSharp.fluid
 
   let categories = false
   if (data.categories[0].category) {

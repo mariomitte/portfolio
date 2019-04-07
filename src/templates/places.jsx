@@ -2,15 +2,13 @@ import React from "react"
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link, graphql } from "gatsby"
-import { SEO, TemplateLayout } from '../components'
-
-import Video from '../components/Video'
+import { SEO, TemplateLayout, Video, Gallery } from '../components'
 
 import website from '../../config'
 
 const Places = ({ data: { prismicPlaces }, location }) => {
   const { data } = prismicPlaces
-  const image = data.image.localFile.childImageSharp
+  const image = data.image.localFile.childImageSharp.fluid
   const video = '<iframe type="text/html" width="100%" height="500px" src=${data.embed.embed_url} frameborder="0"/>'
 
   return (
@@ -24,13 +22,19 @@ const Places = ({ data: { prismicPlaces }, location }) => {
       />
       <Wrapper>
         <Container>
-          <PostList>
-            <div dangerouslySetInnerHTML={{ __html: data.content.html }} />
+          <PostList style={{ padding: '1rem 0', lineHeight: 2 }}>
+            <div dangerouslySetInnerHTML={{ __html: data.quick_content.html }} />
           </PostList>
         </Container>
         <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', width: '100%', height: '100%' }}>
           <Video src={data.embed.embed_url} />
         </div>
+        <Container>
+          <PostList style={{ padding: '1rem 0' }}>
+            <div dangerouslySetInnerHTML={{ __html: data.content.html }} />
+          </PostList>
+        </Container>
+        <Gallery data={data.body} />
       </Wrapper>
     </TemplateLayout>
   )
@@ -46,8 +50,7 @@ const Container = styled.div`
 
 const PostList = styled.div`
   width: 100%;
-  margin: .5rem 0;
-  min-height: 200px;
+  margin: 0;
 `;
 
 const Wrapper = styled.div`
@@ -81,6 +84,9 @@ export const pageQuery = graphql`
         }
         description
         date(formatString: "DD.MM.YYYY")
+        quick_content {
+          html
+        }
         content {
           text
           html
@@ -103,6 +109,24 @@ export const pageQuery = graphql`
           embed_url
           title
           html
+        }
+        body {
+          items {
+            gallery_image {
+              url
+              localFile {
+                childImageSharp {
+                  fluid {
+                    aspectRatio
+                    ...GatsbyImageSharpFluid
+                  }
+                }
+              }
+            }
+            image_captions {
+              html
+            }
+          }
         }
       }
     }

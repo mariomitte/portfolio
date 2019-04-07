@@ -30,9 +30,9 @@ class FooterMenu extends React.Component {
     if(index === 0) {
       return (
         <Wrapper onClick={onModal}>
-          <Star>
+          <Position>
             Show me your love
-          </Star>
+          </Position>
         </Wrapper>
       )
     }
@@ -45,7 +45,7 @@ class FooterMenu extends React.Component {
             onPop={this.pop}
             onToggle={this.toggle}
           />
-          <div style={{ height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <Position>
             <Paragraph>#mario</Paragraph>
             <Button
               color={color}
@@ -53,7 +53,7 @@ class FooterMenu extends React.Component {
               arrow={<ArrowItem color="true" direction={pop ? "down" : "up"} />}
               onClick={this.pop}
             />
-          </div>
+          </Position>
         </Wrapper>
       )
     }
@@ -66,7 +66,7 @@ class FooterMenu extends React.Component {
             onPop={this.pop}
             onToggle={this.toggle}
           />
-          <div style={{ height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <Position>
             <p style={{ padding: 0, margin: 0 }}></p>
             <Button
               color={color}
@@ -74,7 +74,7 @@ class FooterMenu extends React.Component {
               arrow={<ArrowItem color="true" direction={pop ? "down" : "up"} />}
               onClick={this.pop}
             />
-          </div>
+          </Position>
         </Wrapper>
       )
     }
@@ -87,7 +87,7 @@ class FooterMenu extends React.Component {
             onPop={this.pop}
             onToggle={this.toggle}
           />
-          <div style={{ height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <Position>
             <Paragraph>#places</Paragraph>
             <Button
               color={color}
@@ -95,12 +95,20 @@ class FooterMenu extends React.Component {
               arrow={<ArrowItem color="true" direction={pop ? "down" : "up"} />}
               onClick={this.pop}
             />
-          </div>
+          </Position>
         </Wrapper>
       )
     }
   }
 }
+
+const Position = styled.div`
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 1rem;
+`
 
 const Paragraph = styled.p`
   padding: 0;
@@ -135,7 +143,7 @@ const Wrapper = styled.div`
 
   @media (max-width: 700px) {
     left: 0;
-    width: 50%;
+    width: 100%;
   }
 `
 

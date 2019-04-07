@@ -57,7 +57,7 @@ const ImageItem = ({ url, type, back, image }) => {
 const Navbar = ({ menu, onMenu, type, back, image }) => {
   return (
     <Wrapper>
-      <ImageItem url={image} type={type} back={back} image={image ? image.fluid.src : offline} />
+      <ImageItem url={image} type={type} back={back} image={image ? image.fluid : offline} />
       <Header>
         <Column>
           <img style={{ width: '40px', height: '40px' }} src="../favicons/android-chrome-192x192.png" />

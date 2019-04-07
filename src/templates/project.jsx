@@ -8,7 +8,7 @@ import website from '../../config'
 
 const Post = ({ data: { prismicProjects }, location }) => {
   const { data } = prismicProjects
-  const image = data.image.localFile.childImageSharp
+  const image = data.image.localFile.childImageSharp.fluid
 
   return (
     <TemplateLayout type={data.title.text} back="/projects/" image={image}>
