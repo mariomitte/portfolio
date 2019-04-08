@@ -13,6 +13,7 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
   },
   "dependencies": {
+    "@react-google-maps/api": "^1.2.0",
     "babel-plugin-styled-components": "^1.10.0",
     "delay": "^4.1.0",
     "firebase": "^5.9.1",
