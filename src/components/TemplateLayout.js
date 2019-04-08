@@ -15,12 +15,12 @@ class TemplateLayout extends React.Component {
 
   render() {
     const { menu } = this.state
-    const { children, type, back, image } = this.props
+    const { children, type, back, image, geolocation } = this.props
 
     return (
       <Page>
         <GlobalStyles />
-        <Navbar menu={menu} onMenu={this.menu} type={type}  back={back} image={image} />
+        <Navbar menu={menu} onMenu={this.menu} type={type}  back={back} image={image} geolocation={geolocation} />
         <Main>
           <Limits>
             {children}

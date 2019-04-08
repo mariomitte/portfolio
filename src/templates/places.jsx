@@ -10,9 +10,10 @@ const Places = ({ data: { prismicPlaces }, location }) => {
   const { data } = prismicPlaces
   const image = data.image.localFile.childImageSharp.fluid
   console.log(image.src)
+  const geolocation = data.location
 
   return (
-    <TemplateLayout type={data.title.text} back="/places/" image={image}>
+    <TemplateLayout type={data.title.text} back="/places/" image={image} geolocation={geolocation}>
       <SEO
         title={`${data.title.text} | ${website.siteTitleAlt}`}
         pathname={location.pathname}
@@ -80,12 +81,13 @@ export const pageQuery = graphql`
         }
         description
         date(formatString: "DD.MM.YYYY")
-        quick_content {
-          html
-        }
         content {
           text
           html
+        }
+        location {
+          latitude
+          longitude
         }
         image {
           localFile {

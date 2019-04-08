@@ -5,12 +5,16 @@ import { StaticQuery, Link, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 
 import SpringMenu from './Parallax/Menu'
+import Location from './Location'
 
-const ImageItem = ({ url, type, back, image }) => {
+const ImageItem = ({ url, type, back, image, geolocation }) => {
   if (image) {
     return (
       <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex' }}>
         <ImageContainer css={{ top: 0, left: 0, right: 0, bottom: 0 }} style={{ position: `absolute` }} fluid={image} />
+        <div style={{ width: '50%', height: '100%', display: 'flex', justifyContent: 'flex-end' }}>
+          <Location geolocation={geolocation} />
+        </div>
         <SlopeEndGradient>
           <Paragraph>
             {type}
@@ -65,10 +69,10 @@ const ImageItem = ({ url, type, back, image }) => {
   }
 };
 
-const Navbar = ({ menu, onMenu, type, back, image }) => {
+const Navbar = ({ menu, onMenu, type, back, image, geolocation }) => {
   return (
     <Wrapper>
-      <ImageItem url={image} type={type} back={back} image={image} />
+      <ImageItem url={image} type={type} back={back} image={image} geolocation={geolocation} />
       <Header>
         <Column>
           <img style={{ width: '40px', height: '40px' }} src="../favicons/android-chrome-192x192.png" alt="favicon"/>
