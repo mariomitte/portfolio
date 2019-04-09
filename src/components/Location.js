@@ -41,10 +41,9 @@ class Location extends React.Component {
                 width: "8rem",
                 borderRadius: "50%",
                 border: "0.224em solid white",
-                marginTop: "0.5rem",
                 pointerEvents: "none",
               }}
-              zoom={8}
+              zoom={7}
               center={{
                 lat: latitude,
                 lng: longitude

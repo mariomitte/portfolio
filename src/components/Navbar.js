@@ -12,17 +12,19 @@ const ImageItem = ({ url, type, back, image, geolocation }) => {
     return (
       <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex' }}>
         <ImageContainer css={{ top: 0, left: 0, right: 0, bottom: 0 }} style={{ position: `absolute` }} fluid={image} />
-        <div style={{ width: '50%', height: '100%', display: 'flex', justifyContent: 'flex-end' }}>
+        <div style={{ width: '50%', height: '80%', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
           <Location geolocation={geolocation} />
         </div>
         <SlopeEndGradient>
-          <Paragraph>
-            {type}
-          </Paragraph>
-          {back && <StyledLink to={back}>
-              explore
-            </StyledLink>
-          }
+          <SlopeParagraph>
+            <Paragraph>
+              {type}
+            </Paragraph>
+            {back && <StyledLink to={back}>
+                explore
+              </StyledLink>
+            }
+          </SlopeParagraph>
         </SlopeEndGradient>
       </div>
     )
@@ -53,13 +55,15 @@ const ImageItem = ({ url, type, back, image, geolocation }) => {
             <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex' }}>
               <ImageContainer css={{ top: 0, left: 0, right: 0, bottom: 0 }} style={{ position: `absolute` }} fluid={offline} />
               <SlopeEndGradient>
-                <Paragraph>
-                  {type}
-                </Paragraph>
-                {back && <StyledLink to={back}>
-                    explore
-                  </StyledLink>
-                }
+                <SlopeParagraph>
+                  <Paragraph>
+                    {type}
+                  </Paragraph>
+                  {back && <StyledLink to={back}>
+                      explore
+                    </StyledLink>
+                  }
+                </SlopeParagraph>
               </SlopeEndGradient>
             </div>
           )
@@ -99,6 +103,15 @@ const Paragraph = styled.p`
     font-size: 25px;
   }
 `
+const SlopeParagraph = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  opacity: 0.92;
+  width: 100%;
+  height: 80%;
+`
 
 const StyledLink = styled(Link)`
   color: white;
@@ -121,11 +134,6 @@ const SlopeEnd = styled(SlopeContainer)`
 
 const SlopeEndGradient = styled(SlopeEnd)`
   background: linear-gradient(to right, deeppink 0%, red 100%);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  opacity: 0.92;
 `
 
 const ImageContainer = styled(Img)`

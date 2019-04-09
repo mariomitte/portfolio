@@ -11,7 +11,7 @@ const Gallery = ({ data }) => {
     <Wrapper>
       {gallery.map((item, i) => <Content key={i}>
           <figure style={{ position: 'relative', padding: 0, margin: 0 }}>
-            <figcaption style={{ position: 'absolute', top: 0, left: 0, zIndex: 99, padding: 0, margin: 0, width: '100%', backgroundColor: 'whitesmoke', paddingLeft: '10px', opacity: 0.72, fontSize: '1rem', lineHeight: '0.1rem' }}
+            <figcaption style={{ position: 'absolute', top: 0, left: 0, zIndex: 99, margin: 0, width: 'calc(100% - 10px)', backgroundColor: 'whitesmoke', paddingLeft: '10px', opacity: 0.72, fontSize: '1rem', lineHeight: '0.1rem' }}
               dangerouslySetInnerHTML={{ __html: item.image_captions.html }}
             />
             <Img fluid={item.gallery_image.localFile.childImageSharp.fluid} />
@@ -24,12 +24,8 @@ const Gallery = ({ data }) => {
 
 const Content = styled.div`
   display: inline-block;
-  width: calc(30% - 2px);
+  width: 100%;
   margin-top: 1rem;
-
-  @media (max-width: 700px) {
-    width: 100%;
-  }
 `
 
 const Wrapper = styled.div`
