@@ -7,7 +7,7 @@ const config = {
   databaseURL: process.env.GATSBY_APP_DATABASE_URL,
 };
 
-console.log(config)
+// console.log(config)
 
 class Firebase {
   constructor() {
