@@ -185,7 +185,8 @@ const Text = styled.div`
   text-transform: uppercase;
   font-size: 1rem;
   color: white;
-  width: 430px;
+  width: 100%;
+  right: 0;
 
   @media (max-width: 700px) {
     left: 10px;
