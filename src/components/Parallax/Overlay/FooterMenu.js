@@ -64,7 +64,7 @@ class FooterMenu extends React.Component {
             onToggle={this.toggle}
           />
           <Position>
-            <Paragraph></Paragraph>
+            <Paragraph>#projects</Paragraph>
             <Button
               color={color}
               children={<span>Projects</span>}
@@ -105,6 +105,7 @@ const Position = styled.div`
   align-items: center;
   justify-content: space-between;
   padding-left: 1rem;
+  width: 100%;
 `
 
 const Paragraph = styled.p`
@@ -126,7 +127,7 @@ const Wrapper = styled.div`
 
   @media (max-width: 700px) {
     left: 0;
-    width: 47%;
+    width: 100%;
   }
 `
 

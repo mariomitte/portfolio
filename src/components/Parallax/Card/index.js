@@ -58,7 +58,7 @@ const Items = ({ toggle, onClick, uid, title, date, at }) => {
                 <animated.div
                   onClick={onClick}
                   style={{
-                    paddingLeft: '1em',
+                    padding: '0.234em 0.234em 0.234em 1em',
                     transform: x.interpolate(x => `translate3d(${x}%,0,0)`),
                     ...props
                   }}
