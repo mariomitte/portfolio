@@ -59,5 +59,9 @@ module.exports = {
         anonymize: true,
       },
     },
+    `gatsby-plugin-offline`,
+    `gatsby-plugin-netlify`,
+    'gatsby-plugin-netlify-cache',
+
   ],
 }
