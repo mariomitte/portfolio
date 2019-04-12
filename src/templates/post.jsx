@@ -25,15 +25,11 @@ const Post = ({ data: { prismicPost }, location }) => {
         image={image}
       />
       <Wrapper>
-        <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', width: '100%', height: '100%' }}>
-          <Video src={data.embed.embed_url} />
-        </div>
         <Container>
           <PostList style={{ padding: '1rem 0' }}>
             <div dangerouslySetInnerHTML={{ __html: data.content.html }} />
           </PostList>
         </Container>
-        <Gallery data={data.body} />
       </Wrapper>
     </TemplateLayout>
   )
