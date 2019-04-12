@@ -25,11 +25,15 @@ const Post = ({ data: { prismicPost }, location }) => {
         image={image}
       />
       <Wrapper>
+        <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', width: '100%', height: '100%' }}>
+          <Video src={data.embed.embed_url} />
+        </div>
         <Container>
           <PostList style={{ padding: '1rem 0' }}>
             <div dangerouslySetInnerHTML={{ __html: data.content.html }} />
           </PostList>
         </Container>
+        <Gallery data={data.body} />
       </Wrapper>
     </TemplateLayout>
   )
@@ -47,8 +51,9 @@ const PostList = styled.div`
 
 const Wrapper = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
   margin-bottom: 2rem;
   border-radius: 2px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -91,12 +96,25 @@ export const pageQuery = graphql`
           localFile {
             childImageSharp {
               fluid(maxWidth: 1080, quality: 90) {
+                aspectRatio
                 ...GatsbyImageSharpFluid
               }
-              resize(width: 1920, quality: 90) {
-                src
-                height
-                width
+            }
+          }
+        }
+        embed {
+          embed_url
+        }
+        body {
+          items {
+            gallery_image {
+              localFile {
+                childImageSharp {
+                  fluid {
+                    aspectRatio
+                    ...GatsbyImageSharpFluid
+                  }
+                }
               }
             }
           }

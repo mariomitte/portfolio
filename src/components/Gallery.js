@@ -11,9 +11,9 @@ const Gallery = ({ data }) => {
     <Wrapper>
       {gallery.map((item, i) => <Content key={i}>
           <figure style={{ position: 'relative', padding: 0, margin: 0 }}>
-            <figcaption style={{ position: 'absolute', top: 0, left: 0, zIndex: 99, margin: 0, width: 'calc(100% - 10px)', backgroundColor: 'whitesmoke', paddingLeft: '10px', opacity: 0.72, fontSize: '1rem', lineHeight: '0.1rem' }}
+            {item.image_captions && <figcaption style={{ position: 'absolute', top: 0, left: 0, zIndex: 99, margin: 0, width: 'calc(100% - 10px)', backgroundColor: 'whitesmoke', paddingLeft: '10px', opacity: 0.72, fontSize: '1rem', lineHeight: '0.1rem' }}
               dangerouslySetInnerHTML={{ __html: item.image_captions.html }}
-            />
+            />}
             <Img fluid={item.gallery_image.localFile.childImageSharp.fluid} />
           </figure>
         </Content>
