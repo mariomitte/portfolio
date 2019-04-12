@@ -3,7 +3,7 @@
   "private": true,
   "description": "Mario Portfolio - gatsby starter hello world",
   "version": "1.0.1",
-  "license": "MIT",
+  "license": "None",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
