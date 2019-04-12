@@ -1,5 +1,5 @@
 {
-  "name": "Mario Portfolio",
+  "name": "Mario",
   "private": true,
   "description": "Mario Portfolio - gatsby starter hello world",
   "version": "1.0.1",
@@ -15,9 +15,10 @@
   "dependencies": {
     "@react-google-maps/api": "^1.2.0",
     "babel-plugin-styled-components": "^1.10.0",
+    "core-js": "^2.6.5",
     "delay": "^4.1.0",
     "firebase": "^5.9.1",
-    "gatsby": "^2.1.31",
+    "gatsby": "^2.3.22",
     "gatsby-image": "^2.0.34",
     "gatsby-plugin-catch-links": "^2.0.13",
     "gatsby-plugin-google-analytics": "^2.0.17",

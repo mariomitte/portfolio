@@ -2,8 +2,7 @@ import React from "react"
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { graphql } from "gatsby"
-
-import { SEO, TemplateLayout } from '../components'
+import { SEO, TemplateLayout, Video, Gallery } from '../components'
 
 import website from '../../config'
 
@@ -26,9 +25,15 @@ const Post = ({ data: { prismicPost }, location }) => {
         image={image}
       />
       <Wrapper>
+        <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', width: '100%', height: '100%' }}>
+          <Video src={data.embed.embed_url} />
+        </div>
         <Container>
-          <PostList dangerouslySetInnerHTML={{ __html: data.content.html }} />
+          <PostList style={{ padding: '1rem 0' }}>
+            <div dangerouslySetInnerHTML={{ __html: data.content.html }} />
+          </PostList>
         </Container>
+        <Gallery data={data.body} />
       </Wrapper>
     </TemplateLayout>
   )

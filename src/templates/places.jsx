@@ -9,7 +9,6 @@ import website from '../../config'
 const Places = ({ data: { prismicPlaces }, location }) => {
   const { data } = prismicPlaces
   const image = data.image.localFile.childImageSharp.fluid
-  console.log(image.src)
   const geolocation = data.location
 
   return (
