@@ -45,8 +45,7 @@ const Container = styled.div`
 
 const PostList = styled.div`
   width: 100%;
-  margin: .5rem 0;
-  min-height: 200px;
+  margin: 0 0 .5rem 0;
 `;
 
 const Wrapper = styled.div`

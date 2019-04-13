@@ -13,8 +13,9 @@ module.exports = {
   author: 'mitte', // Author for schema.org JSONLD
 
   // siteFBAppID: '123456789', // Facebook App ID - Optional
-  twitter: '@mariomitte', // Twitter Username
+  twitter: 'mariotkalac', // Twitter Username
   facebook: 'mario.tkalac', // Facebook Site Name
+  instagram: 'mario_mitte', // Instagram Site Name
   googleAnalyticsID: 'UA-134823786-1',
 
   // Manifest and Progress color

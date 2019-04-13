@@ -4,7 +4,13 @@ import { Spring, Keyframes, animated, config } from "react-spring/renderprops";
 import delay from "delay";
 import styled from 'styled-components'
 
+import social from '../../../../config'
+
 import 'typeface-raleway'
+import { FaHeart } from 'react-icons/fa'
+import { FaTwitter } from 'react-icons/fa'
+import { FaFacebookF } from 'react-icons/fa'
+import { FaInstagram } from 'react-icons/fa'
 
 const fast = {
   ...config.stiff,
@@ -35,6 +41,20 @@ const KeyFramed = Keyframes.Trail({
   close: { to: { x: -100, opacity: 0 } }
 });
 
+const Social = () => (
+  <SocialWrapper>
+    <SocialItem href={"https://www.facebook.com/"+social.facebook} target="_blank" rel="noopener noreferrer">
+      <FaFacebookF style={{ width: "50%", height: "50%" }}/>
+    </SocialItem>
+    <SocialItem href={"https://www.instagram.com/"+social.instagram} target="_blank" rel="noopener noreferrer">
+      <FaInstagram style={{ width: "50%", height: "50%" }} />
+    </SocialItem>
+    <SocialItem href={"https://twitter.com/"+social.twitter} target="_blank" rel="noopener noreferrer">
+      <FaTwitter style={{ width: "50%", height: "50%" }} />
+    </SocialItem>
+  </SocialWrapper>
+)
+
 const items = ["home", "blog", "projects", "places", "about me"];
 const link = ["/", "/blog", "/projects", "/places", "/about-me"]
 
@@ -50,6 +70,9 @@ const Navigation = ({ toggle }) => {
             transform: x.interpolate(x => `translate3d(${x}%,0,0)`)
           }}
         >
+          <About>
+            build with <span style={{ margin: "0 0.5rem", color: "#e53935" }}><FaHeart /></span> by Mario
+          </About>
           <KeyFramed
             native
             items={items}
@@ -68,6 +91,7 @@ const Navigation = ({ toggle }) => {
               </KeyframedAnimated>
             )}
           </KeyFramed>
+          <Social />
         </SidebarAnimated>
       )
     }</Sidebar>
@@ -123,6 +147,43 @@ class SpringMenu extends React.Component {
     );
   }
 }
+
+const About = styled.div`
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 50%;
+  height: 40px;
+  display: flex;
+  align-ittems: center;
+  justify-content: flex-end;
+  font-size: 16px;
+
+  @media (max-width: 700px) {
+    font-size: 12px;
+  }
+`
+
+const SocialItem = styled.a`
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  margin: 0 1rem;
+  background: linear-gradient(to right, deeppink 0%, red 100%);
+  opacity: 0.92;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+`
+
+const SocialWrapper = styled.div`
+  width: 100%;
+  margin-top: 2rem;
+  display: flex;
+  align-ittems: center;
+  justify-content: center;
+`
 
 const StyledLink = styled(Link)`
   font-family: 'Kanit', sans-serif;
