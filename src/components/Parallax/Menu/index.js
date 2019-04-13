@@ -175,6 +175,11 @@ const SocialItem = styled.a`
   justify-content: center;
   align-items: center;
   text-decoration: none;
+
+  @media (max-width: 700px) {
+    width: 2em;
+    height: 2em;
+  }
 `
 
 const SocialWrapper = styled.div`
