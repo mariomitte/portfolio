@@ -63,8 +63,6 @@ class Index extends React.Component {
       location
     } = this.props
 
-    console.log(location)
-
     const SEOdata = homepage.data.page[0];
 
     let pageItem = homepage.data.page.map((page, i) => {
