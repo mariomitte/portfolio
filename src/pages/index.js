@@ -5,6 +5,7 @@ import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { Parallax } from 'react-spring/renderprops-addons'
 
 import Page from '../components/Page'
+import SEO from '../components/SEO'
 import Overlay from '../components/Parallax/Overlay'
 
 import theme from '../../config/theme'
@@ -59,7 +60,12 @@ class Index extends React.Component {
     const { items, index, menu, modal, gradients } = this.state
     const {
       data: { homepage },
+      location
     } = this.props
+
+    console.log(location)
+
+    const SEOdata = homepage.data.page[0];
 
     let pageItem = homepage.data.page.map((page, i) => {
       return (
@@ -80,15 +86,24 @@ class Index extends React.Component {
     })
 
     return (
-      <ThemeProvider theme={theme}>
-        <Wrapper>
-          <GlobalStyles />
-          <Parallax className="container" ref="parallax" pages={items} horizontal scrolling={false}>
-            {pageItem}
-          </Parallax>
-          <Overlay menu={menu} onMenu={this.menu} prevIndex={this.prevIndex} nextIndex={this.nextIndex} color={gradients.length === 0 ? gradientsOffline[index] : gradients[index]} modal={modal} onModal={this.modal} />
-        </Wrapper>
-      </ThemeProvider>
+      <React.Fragment>
+        <SEO
+          title={`${SEOdata.caption}`}
+          pathname={location.pathname}
+          desc={SEOdata.first.text}
+          node={homepage}
+          image={SEOdata.image.url}
+        />
+        <ThemeProvider theme={theme}>
+          <Wrapper>
+            <GlobalStyles />
+            <Parallax className="container" ref="parallax" pages={items} horizontal scrolling={false}>
+              {pageItem}
+            </Parallax>
+            <Overlay menu={menu} onMenu={this.menu} prevIndex={this.prevIndex} nextIndex={this.nextIndex} color={gradients.length === 0 ? gradientsOffline[index] : gradients[index]} modal={modal} onModal={this.modal} />
+          </Wrapper>
+        </ThemeProvider>
+      </React.Fragment>
     );
   }
 }
