@@ -1,11 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import Img from 'gatsby-image'
 
 import { SEO, TemplateLayout, Video } from '../components'
-import Header from '../components/Header';
 
 import website from '../../config'
 
@@ -71,9 +70,6 @@ const Wrapper = styled.div`
   border-radius: 2px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 `
-
-const Paragraph = styled.p``
-
 
 export default AboutMe;
 
