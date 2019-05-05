@@ -25,7 +25,7 @@ const Post = ({ data: { prismicPost }, location }) => {
         image={image}
       />
       <Wrapper>
-        {data.embed.embed_url && <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', width: '100%', height: '100%' }}>
+        {data.embed.embed_url && <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', width: '100%', height: '100%', marginBottom: '1rem' }}>
           <Video src={data.embed.embed_url} />
         </div>}
         {data.content.html && <Container>
