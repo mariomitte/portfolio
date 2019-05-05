@@ -10,7 +10,9 @@ const Projects = ({ pop, toggle, onPop, onToggle }) => {
     <StaticQuery
       query={graphql`
         query FooterMenuProjectsQuery {
-          allPrismicProjects {
+          allPrismicProjects(
+            limit: 4
+          ) {
             edges {
               node {
                 uid

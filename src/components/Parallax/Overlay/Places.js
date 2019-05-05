@@ -10,7 +10,9 @@ const Places = ({ pop, toggle, onPop, onToggle }) => {
     <StaticQuery
       query={graphql`
         query FooterMenuPlacesQuery {
-          allPrismicPlaces {
+          allPrismicPlaces(
+            limit: 4
+          ) {
             edges {
               node {
                 uid

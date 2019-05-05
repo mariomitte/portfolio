@@ -10,7 +10,9 @@ const BlogPosts = ({ pop, toggle, onPop, onToggle }) => {
     <StaticQuery
       query={graphql`
         query FooterMenuBlogPostsQuery {
-          allPrismicPost {
+          allPrismicPost(
+            limit: 4
+          ) {
             edges {
               node {
                 uid

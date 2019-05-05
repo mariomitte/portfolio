@@ -37,6 +37,7 @@ const KeyFramed = Keyframes.Trail({
 const Items = ({ toggle, onClick, uid, title, date, at }) => {
   const state = toggle ? "open" : "close";
   const items = title
+  console.log(items)
 
   return (
     <Sidebar native state={state}>{
@@ -108,7 +109,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   width: 100%;
   height: 100%;
-  font-size: 0.8em;
+  font-size: 0.6em;
 `
 
 const KeyframedAnimated = styled(animated.div)`
