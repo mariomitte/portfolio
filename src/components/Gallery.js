@@ -25,7 +25,7 @@ const Gallery = ({ data }) => {
 const Content = styled.div`
   display: inline-block;
   width: 100%;
-  margin-top: 0;
+  margin-bottom: 1rem;
 `
 
 const Wrapper = styled.div`
